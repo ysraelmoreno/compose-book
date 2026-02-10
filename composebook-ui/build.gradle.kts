@@ -2,18 +2,15 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    `maven-publish`
 }
 
-group = "com.ysraelmorenopkg.storybook"
-version = "0.1.0-SNAPSHOT"
-
 android {
-    namespace = "com.ysraelmorenopkg.storybook_compose"
+    namespace = "com.ysraelmorenopkg.storybook.ui"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 25
+        targetSdk = 35
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -28,26 +25,24 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+    
     buildFeatures {
         compose = true
     }
     
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 
 dependencies {
-    implementation(project(":storybook-core"))
+    implementation(project(":composebook-core"))
+    implementation(project(":composebook-compose"))
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -60,18 +55,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-            }
-            
-            groupId = "com.ysraelmorenopkg.storybook"
-            artifactId = "storybook-compose"
-            version = "0.1.0-SNAPSHOT"
-        }
-    }
 }

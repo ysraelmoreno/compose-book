@@ -27,13 +27,13 @@ A library for:
 
 ComposeBook provides two UI implementations:
 
-### 1. Modern Custom Design System (`storybook-ui` module)
+### 1. Modern Custom Design System (`composebook-ui` module)
 - Custom design system inspired by Storybook JS 7+
 - Dark/Light theme support
 - Professional developer tool aesthetics
 - No Material Design dependencies
 
-### 2. Classic Material Theme (`storybook-compose` module)
+### 2. Classic Material Theme (`composebook-compose` module)
 - Traditional Material Design 3 look
 - Familiar Android UI patterns
 - Lighter weight option
@@ -44,10 +44,10 @@ ComposeBook provides two UI implementations:
 
 ```
 composebook-kotlin/
-├── storybook-core/       # Pure Kotlin, UI-independent core
-├── storybook-compose/    # Jetpack Compose adapter
-├── storybook-ui/         # Modern UI with custom design system
-└── storybook-samples/    # Example stories
+├── composebook-core/       # Pure Kotlin, UI-independent core
+├── composebook-compose/    # Jetpack Compose adapter
+├── composebook-ui/         # Modern UI with custom design system
+└── composebook-samples/    # Example stories
 ```
 
 ### Core Principles
@@ -64,8 +64,8 @@ composebook-kotlin/
 
 ```kotlin
 dependencies {
-    implementation(project(":storybook-core"))
-    implementation(project(":storybook-compose"))
+    implementation(project(":composebook-core"))
+    implementation(project(":composebook-compose"))
 }
 ```
 
@@ -263,12 +263,12 @@ The MVP is successful if:
 
 ## Project Structure
 
-### storybook-core
+### composebook-core
 
 Pure Kotlin module with clean architecture:
 
 ```
-storybook-core/
+composebook-core/
 ├── api/          # Story, StoryContext
 ├── model/        # StoryId
 ├── control/      # PropControl, PropBinding
@@ -279,24 +279,24 @@ storybook-core/
 
 **Key constraint**: No UI framework dependencies.
 
-### storybook-compose
+### composebook-compose
 
 Jetpack Compose implementation:
 
 ```
-storybook-compose/
+composebook-compose/
 ├── adapter/      # ComposeStory, ComposeStoryBuilder
 ├── canvas/       # StoryCanvas
 ├── controls/     # Control renderers (TextField, Switch, etc.)
 └── app/          # Classic ComposeBookApp
 ```
 
-### storybook-ui
+### composebook-ui
 
 Modern UI with custom design system:
 
 ```
-storybook-ui/
+composebook-ui/
 ├── theme/        # ComposeBookColors, ComposeBookTypography, ComposeBookTheme
 ├── components/   # Custom buttons, text, icons, dividers
 └── app/          # ModernComposeBookApp, ControlsPanel
@@ -304,7 +304,7 @@ storybook-ui/
 
 ## Examples
 
-See `storybook-samples/` for complete examples:
+See `composebook-samples/` for complete examples:
 - Button (Primary, Disabled)
 - Card (Default, With Image)
 
@@ -321,13 +321,13 @@ See `storybook-samples/` for complete examples:
 
 ```bash
 # Build core (pure Kotlin)
-./gradlew :storybook-core:build
+./gradlew :composebook-core:build
 
 # Build Compose adapter
-./gradlew :storybook-compose:build
+./gradlew :composebook-compose:build
 
 # Build samples
-./gradlew :storybook-samples:build
+./gradlew :composebook-samples:build
 
 # Build and run app
 ./gradlew :app:assembleDebug

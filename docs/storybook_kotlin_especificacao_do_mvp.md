@@ -15,8 +15,8 @@
 
 ### 1.1 O que o MVP DEVE ter
 
-- `storybook-core` funcional
-- `storybook-compose` mínimo (Android)
+- `composebook-core` funcional
+- `composebook-compose` mínimo (Android)
 - Registro manual de stories
 - Painel simples de navegação
 - Canvas de renderização
@@ -40,14 +40,14 @@
 
 ```
 composebook-kotlin/
-├── storybook-core/
-├── storybook-compose/
-└── storybook-samples/
+├── composebook-core/
+├── composebook-compose/
+└── composebook-samples/
 ```
 
 ---
 
-## 3. storybook-core — Requisitos do MVP
+## 3. composebook-core — Requisitos do MVP
 
 ### 3.1 API mínima obrigatória
 
@@ -126,7 +126,7 @@ class InMemoryStoryRegistry : StoryRegistry
 
 ---
 
-## 4. storybook-compose — Requisitos do MVP
+## 4. composebook-compose — Requisitos do MVP
 
 ### 4.1 Responsabilidade do módulo
 
@@ -210,7 +210,7 @@ Sem abstração extra no MVP.
 
 ---
 
-## 5. storybook-samples — Requisitos do MVP
+## 5. composebook-samples — Requisitos do MVP
 
 ### 5.1 Objetivo
 

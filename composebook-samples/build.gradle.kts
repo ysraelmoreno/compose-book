@@ -37,8 +37,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":storybook-core"))
-    implementation(project(":storybook-compose"))
+    implementation(project(":composebook-core"))
+    implementation(project(":composebook-compose"))
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

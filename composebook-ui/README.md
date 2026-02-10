@@ -62,7 +62,7 @@ ModernComposeBookApp(
 
 ## Dependencies
 
-- `storybook-core`: Core story functionality
-- `storybook-compose`: Compose integration
+- `composebook-core`: Core story functionality
+- `composebook-compose`: Compose integration
 - Jetpack Compose UI
 - Material 3 (minimal usage for switches)

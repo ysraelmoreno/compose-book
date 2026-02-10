@@ -6,7 +6,7 @@ This guide explains how to customize and extend the modern ComposeBook UI to mat
 
 ### 1. Change Color Palette
 
-Edit `storybook-ui/src/main/kotlin/.../theme/ComposeBookColors.kt`:
+Edit `composebook-ui/src/main/kotlin/.../theme/ComposeBookColors.kt`:
 
 ```kotlin
 val CustomDark = ComposeBookColors(
@@ -35,7 +35,7 @@ ComposeBookTheme(darkTheme = true) {
 
 ### 2. Customize Typography
 
-Edit `storybook-ui/src/main/kotlin/.../theme/ComposeBookTypography.kt`:
+Edit `composebook-ui/src/main/kotlin/.../theme/ComposeBookTypography.kt`:
 
 ```kotlin
 val CustomTypography = ComposeBookTypography(
@@ -477,6 +477,6 @@ class MainActivity : ComponentActivity() {
 ## Questions?
 
 Check the following files for implementation details:
-- Theme: `storybook-ui/src/main/kotlin/.../theme/`
-- Components: `storybook-ui/src/main/kotlin/.../components/`
-- App: `storybook-ui/src/main/kotlin/.../app/`
+- Theme: `composebook-ui/src/main/kotlin/.../theme/`
+- Components: `composebook-ui/src/main/kotlin/.../components/`
+- App: `composebook-ui/src/main/kotlin/.../app/`
