@@ -34,7 +34,7 @@ import com.ysraelmorenopkg.storybook.core.registry.StoryRegistry
 import com.ysraelmorenopkg.storybook.core.runtime.StoryRuntimeState
 
 /**
- * Main Storybook application UI shell.
+ * Main ComposeBook application UI shell.
  * 
  * Provides a Scaffold-based layout with:
  * - TopBar: Retractable Stories header
@@ -53,7 +53,7 @@ import com.ysraelmorenopkg.storybook.core.runtime.StoryRuntimeState
  *              Example: `theme = { MyAppTheme { it() } }`
  */
 @Composable
-fun StorybookApp(
+fun ComposeBookApp(
     registry: StoryRegistry,
     modifier: Modifier = Modifier,
     theme: @Composable (content: @Composable () -> Unit) -> Unit = { content ->

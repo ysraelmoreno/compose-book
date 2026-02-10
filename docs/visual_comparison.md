@@ -32,18 +32,18 @@ Text:             Material onSurface
 ```
 Background:       #1A1A1A (Deep dark)
 Surface:          #262626 (Elevated)
-Accent:           #029CFD (Storybook blue)
+Accent:           #029CFD (ComposeBook blue)
 Text Primary:     #E8E8E8 (High contrast)
 Text Secondary:   #B3B3B3 (Medium contrast)
 Border:           #3D3D3D (Subtle)
 ```
 
 ### Components
-- Custom StorybookTheme
-- Custom StorybookButton with 6dp rounded corners
-- Custom StorybookText with optimized typography
+- Custom ComposeBookTheme
+- Custom ComposeBookButton with 6dp rounded corners
+- Custom ComposeBookText with optimized typography
 - Custom SVG-style icons (Book, Settings, Chevrons)
-- Professional Storybook blue accent
+- Professional ComposeBook blue accent
 
 ### Layout
 - Three-panel design (Sidebar, Canvas, Controls)
@@ -172,12 +172,12 @@ color = MaterialTheme.colorScheme.surfaceVariant
 
 ### After (Custom)
 ```kotlin
-color = StorybookTheme.colors.background          // #1A1A1A
-color = StorybookTheme.colors.backgroundElevated  // #262626
-color = StorybookTheme.colors.accent              // #029CFD
-color = StorybookTheme.colors.textPrimary         // #E8E8E8
-color = StorybookTheme.colors.textSecondary       // #B3B3B3
-color = StorybookTheme.colors.border              // #3D3D3D
+color = ComposeBookTheme.colors.background          // #1A1A1A
+color = ComposeBookTheme.colors.backgroundElevated  // #262626
+color = ComposeBookTheme.colors.accent              // #029CFD
+color = ComposeBookTheme.colors.textPrimary         // #E8E8E8
+color = ComposeBookTheme.colors.textSecondary       // #B3B3B3
+color = ComposeBookTheme.colors.border              // #3D3D3D
 ```
 
 ---
@@ -240,11 +240,11 @@ color = StorybookTheme.colors.border              // #3D3D3D
 - Minimal customization
 
 ### After
-- ✨ Storybook JS-inspired design
+- ✨ ComposeBook JS-inspired design
 - ✨ Custom color palette (#029CFD accent)
 - ✨ Professional dark theme
 - ✨ Retractable panels for space
-- ✨ Custom icons matching Storybook
+- ✨ Custom icons matching ComposeBook
 - ✨ Smooth animations
 - ✨ Better visual hierarchy
 - ✨ Optimized typography
@@ -255,7 +255,7 @@ color = StorybookTheme.colors.border              // #3D3D3D
 
 ## Summary
 
-The modernization transforms Storybook Kotlin from a **generic Material Design app** into a **professional developer tool** with a distinctive identity matching the industry-standard Storybook JS interface.
+The modernization transforms ComposeBook Kotlin from a **generic Material Design app** into a **professional developer tool** with a distinctive identity matching the industry-standard ComposeBook JS interface.
 
 Key improvements:
 1. Custom design system (no Material dependency)
@@ -263,6 +263,6 @@ Key improvements:
 3. Better space utilization
 4. Modern layout with retractable panels
 5. Custom icons and components
-6. Storybook JS familiarity
+6. ComposeBook JS familiarity
 7. Developer-optimized dark theme
 8. Improved user experience

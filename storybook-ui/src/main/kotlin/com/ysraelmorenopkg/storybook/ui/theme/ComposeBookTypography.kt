@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
  * Font sizes and weights optimized for code and technical content.
  */
 @Immutable
-data class StorybookTypography(
+data class ComposeBookTypography(
     val titleLarge: TextStyle,
     val titleMedium: TextStyle,
     val titleSmall: TextStyle,
@@ -29,7 +29,7 @@ data class StorybookTypography(
     val code: TextStyle
 ) {
     companion object {
-        val Default = StorybookTypography(
+        val Default = ComposeBookTypography(
             // Titles
             titleLarge = TextStyle(
                 fontFamily = FontFamily.SansSerif,

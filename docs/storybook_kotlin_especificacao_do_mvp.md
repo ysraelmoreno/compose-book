@@ -39,7 +39,7 @@
 ## 2. Módulos do MVP
 
 ```
-storybook-kotlin/
+composebook-kotlin/
 ├── storybook-core/
 ├── storybook-compose/
 └── storybook-samples/
@@ -141,7 +141,7 @@ class InMemoryStoryRegistry : StoryRegistry
 
 ```kotlin
 @Composable
-fun StorybookApp(registry: StoryRegistry)
+fun ComposeBookApp(registry: StoryRegistry)
 ```
 
 Estrutura mínima:

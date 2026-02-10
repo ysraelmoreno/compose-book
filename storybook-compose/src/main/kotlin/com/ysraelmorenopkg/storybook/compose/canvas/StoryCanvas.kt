@@ -2,14 +2,12 @@ package com.ysraelmorenopkg.storybook.compose.canvas
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.ysraelmorenopkg.storybook.compose.adapter.ComposeStory
 import com.ysraelmorenopkg.storybook.compose.adapter.DefaultStoryContext
 import com.ysraelmorenopkg.storybook.core.environment.ThemeMode

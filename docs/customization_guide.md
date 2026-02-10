@@ -1,15 +1,15 @@
-# Customization Guide - Modern Storybook UI
+# Customization Guide - Modern ComposeBook UI
 
-This guide explains how to customize and extend the modern Storybook UI to match your design system.
+This guide explains how to customize and extend the modern ComposeBook UI to match your design system.
 
 ## Quick Customization
 
 ### 1. Change Color Palette
 
-Edit `storybook-ui/src/main/kotlin/.../theme/StorybookColors.kt`:
+Edit `storybook-ui/src/main/kotlin/.../theme/ComposeBookColors.kt`:
 
 ```kotlin
-val CustomDark = StorybookColors(
+val CustomDark = ComposeBookColors(
     // Your custom colors
     background = Color(0xFF0D1117),        // GitHub dark
     backgroundElevated = Color(0xFF161B22),
@@ -23,22 +23,22 @@ val CustomDark = StorybookColors(
 Then use in your app:
 
 ```kotlin
-StorybookTheme(darkTheme = true) {
+ComposeBookTheme(darkTheme = true) {
     // Use CustomDark colors
     CompositionLocalProvider(
-        LocalStorybookColors provides CustomDark
+        LocalComposeBookColors provides CustomDark
     ) {
-        ModernStorybookApp(registry = registry)
+        ModernComposeBookApp(registry = registry)
     }
 }
 ```
 
 ### 2. Customize Typography
 
-Edit `storybook-ui/src/main/kotlin/.../theme/StorybookTypography.kt`:
+Edit `storybook-ui/src/main/kotlin/.../theme/ComposeBookTypography.kt`:
 
 ```kotlin
-val CustomTypography = StorybookTypography(
+val CustomTypography = ComposeBookTypography(
     titleLarge = TextStyle(
         fontFamily = YourCustomFont,
         fontWeight = FontWeight.Bold,
@@ -52,13 +52,13 @@ val CustomTypography = StorybookTypography(
 
 ```kotlin
 // Force light theme
-ModernStorybookApp(
+ModernComposeBookApp(
     registry = registry,
     darkTheme = false
 )
 
 // Dynamic based on system
-ModernStorybookApp(
+ModernComposeBookApp(
     registry = registry,
     darkTheme = isSystemInDarkTheme()
 )
@@ -68,7 +68,7 @@ ModernStorybookApp(
 
 ### Custom Sidebar Width
 
-Edit `ModernStorybookApp.kt`:
+Edit `ModernComposeBookApp.kt`:
 
 ```kotlin
 StoriesSidebar(
@@ -92,14 +92,14 @@ ControlsPanel(
 
 ### Custom Icons
 
-Create your own icons in `components/StorybookIcons.kt`:
+Create your own icons in `components/ComposeBookIcons.kt`:
 
 ```kotlin
 @Composable
 fun CustomBookIcon(
     modifier: Modifier = Modifier,
     size: Dp = 16.dp,
-    color: Color = StorybookTheme.colors.accent
+    color: Color = ComposeBookTheme.colors.accent
 ) {
     Canvas(modifier = modifier.size(size)) {
         // Your custom icon drawing code
@@ -111,31 +111,31 @@ fun CustomBookIcon(
 }
 ```
 
-Then replace in `ModernStorybookApp.kt`:
+Then replace in `ModernComposeBookApp.kt`:
 
 ```kotlin
 Row(
     horizontalArrangement = Arrangement.spacedBy(8.dp)
 ) {
     CustomBookIcon()  // Instead of BookIcon()
-    StorybookTitle("Stories")
+    ComposeBookTitle("Stories")
 }
 ```
 
 ### Custom Button Styles
 
-Create variants in `components/StorybookButton.kt`:
+Create variants in `components/ComposeBookButton.kt`:
 
 ```kotlin
 @Composable
-fun StorybookPrimaryButton(
+fun ComposeBookPrimaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
-    StorybookButton(
+    ComposeBookButton(
         onClick = onClick,
-        backgroundColor = StorybookTheme.colors.accent,
+        backgroundColor = ComposeBookTheme.colors.accent,
         contentColor = Color.White,
         modifier = modifier,
         content = content
@@ -176,7 +176,7 @@ private fun ColorControlRenderer(
 
 ```kotlin
 object GitHubTheme {
-    val colors = StorybookColors(
+    val colors = ComposeBookColors(
         background = Color(0xFF0D1117),
         backgroundElevated = Color(0xFF161B22),
         backgroundHighlight = Color(0xFF21262D),
@@ -203,7 +203,7 @@ object GitHubTheme {
 
 ```kotlin
 object VSCodeTheme {
-    val colors = StorybookColors(
+    val colors = ComposeBookColors(
         background = Color(0xFF1E1E1E),
         backgroundElevated = Color(0xFF252526),
         backgroundHighlight = Color(0xFF2D2D30),
@@ -229,11 +229,11 @@ object VSCodeTheme {
 ### Using Custom Theme
 
 ```kotlin
-StorybookTheme(darkTheme = true) {
+ComposeBookTheme(darkTheme = true) {
     CompositionLocalProvider(
-        LocalStorybookColors provides GitHubTheme.colors
+        LocalComposeBookColors provides GitHubTheme.colors
     ) {
-        ModernStorybookApp(registry = registry)
+        ModernComposeBookApp(registry = registry)
     }
 }
 ```
@@ -242,16 +242,16 @@ StorybookTheme(darkTheme = true) {
 
 ### Add Search Bar
 
-In `ModernStorybookApp.kt`, add to `StoriesSidebar`:
+In `ModernComposeBookApp.kt`, add to `StoriesSidebar`:
 
 ```kotlin
 Column(
-    modifier = modifier.background(StorybookTheme.colors.backgroundElevated)
+    modifier = modifier.background(ComposeBookTheme.colors.backgroundElevated)
 ) {
     // Header
     SidebarHeader(...)
     
-    StorybookDivider()
+    ComposeBookDivider()
     
     // NEW: Search bar
     SearchBar(
@@ -316,22 +316,22 @@ Box(
 ## Best Practices
 
 ### 1. Keep Colors Consistent
-Always use `StorybookTheme.colors` instead of hardcoded colors:
+Always use `ComposeBookTheme.colors` instead of hardcoded colors:
 
 ```kotlin
 // ✅ Good
-color = StorybookTheme.colors.accent
+color = ComposeBookTheme.colors.accent
 
 // ❌ Bad
 color = Color(0xFF029CFD)
 ```
 
 ### 2. Use Typography System
-Always use `StorybookTheme.typography`:
+Always use `ComposeBookTheme.typography`:
 
 ```kotlin
 // ✅ Good
-style = StorybookTheme.typography.bodyMedium
+style = ComposeBookTheme.typography.bodyMedium
 
 // ❌ Bad
 fontSize = 13.sp
@@ -355,14 +355,14 @@ Create reusable components in `components/`:
 
 ```kotlin
 @Composable
-fun StorybookCard(
+fun ComposeBookCard(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
-            .background(StorybookTheme.colors.surface)
+            .background(ComposeBookTheme.colors.surface)
             .padding(16.dp)
     ) {
         content()
@@ -396,9 +396,9 @@ AnimatedVisibility(
 @Preview(showBackground = true)
 @Composable
 fun CustomThemePreview() {
-    StorybookTheme(darkTheme = true) {
+    ComposeBookTheme(darkTheme = true) {
         CompositionLocalProvider(
-            LocalStorybookColors provides GitHubTheme.colors
+            LocalComposeBookColors provides GitHubTheme.colors
         ) {
             // Your component
         }
@@ -413,8 +413,8 @@ fun CustomThemePreview() {
 @Preview(name = "Light Theme", uiMode = UI_MODE_NIGHT_NO)
 @Composable
 fun ThemePreview() {
-    StorybookTheme(darkTheme = isSystemInDarkTheme()) {
-        ModernStorybookApp(registry = testRegistry)
+    ComposeBookTheme(darkTheme = isSystemInDarkTheme()) {
+        ModernComposeBookApp(registry = testRegistry)
     }
 }
 ```
@@ -426,7 +426,7 @@ fun ThemePreview() {
 ```kotlin
 // 1. Define your colors
 object MyCompanyTheme {
-    val colors = StorybookColors(
+    val colors = ComposeBookColors(
         background = Color(0xFF1A1F2E),
         backgroundElevated = Color(0xFF252B3B),
         accent = Color(0xFF00D9FF),
@@ -435,7 +435,7 @@ object MyCompanyTheme {
         // ... other colors
     )
     
-    val typography = StorybookTypography(
+    val typography = ComposeBookTypography(
         titleLarge = TextStyle(
             fontFamily = FontFamily(Font(R.font.my_custom_font)),
             fontSize = 24.sp,
@@ -454,12 +454,12 @@ class MainActivity : ComponentActivity() {
         registerStories(registry)
         
         setContent {
-            StorybookTheme(darkTheme = true) {
+            ComposeBookTheme(darkTheme = true) {
                 CompositionLocalProvider(
-                    LocalStorybookColors provides MyCompanyTheme.colors,
-                    LocalStorybookTypography provides MyCompanyTheme.typography
+                    LocalComposeBookColors provides MyCompanyTheme.colors,
+                    LocalComposeBookTypography provides MyCompanyTheme.typography
                 ) {
-                    ModernStorybookApp(registry = registry)
+                    ModernComposeBookApp(registry = registry)
                 }
             }
         }
@@ -471,7 +471,7 @@ class MainActivity : ComponentActivity() {
 
 - [Modern UI Implementation Docs](modern_ui_implementation.md)
 - [Visual Comparison](visual_comparison.md)
-- [Storybook JS Design System](https://storybook.js.org/)
+- [ComposeBook JS Design System](https://storybook.js.org/)
 - [Jetpack Compose Theming](https://developer.android.com/jetpack/compose/themes)
 
 ## Questions?

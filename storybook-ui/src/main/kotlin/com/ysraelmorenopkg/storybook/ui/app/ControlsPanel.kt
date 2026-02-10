@@ -40,12 +40,12 @@ import com.ysraelmorenopkg.storybook.core.runtime.StoryRuntimeState
 import com.ysraelmorenopkg.storybook.ui.components.ChevronDownIcon
 import com.ysraelmorenopkg.storybook.ui.components.ChevronUpIcon
 import com.ysraelmorenopkg.storybook.ui.components.SettingsIcon
-import com.ysraelmorenopkg.storybook.ui.components.StorybookBodyText
-import com.ysraelmorenopkg.storybook.ui.components.StorybookDivider
-import com.ysraelmorenopkg.storybook.ui.components.StorybookIconButton
-import com.ysraelmorenopkg.storybook.ui.components.StorybookLabel
-import com.ysraelmorenopkg.storybook.ui.components.StorybookTitle
-import com.ysraelmorenopkg.storybook.ui.theme.StorybookTheme
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookBodyText
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookDivider
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookIconButton
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookLabel
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookTitle
+import com.ysraelmorenopkg.storybook.ui.theme.ComposeBookTheme
 
 /**
  * Modern controls panel matching Storybook JS design.
@@ -62,9 +62,9 @@ fun ControlsPanel(
     Column(
         modifier = modifier
             .navigationBarsPadding()
-            .background(StorybookTheme.colors.backgroundElevated)
+            .background(ComposeBookTheme.colors.backgroundElevated)
     ) {
-        StorybookDivider()
+        ComposeBookDivider()
         
         // Header - Always visible
         Row(
@@ -80,7 +80,7 @@ fun ControlsPanel(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 SettingsIcon()
-                StorybookTitle("Controls")
+                ComposeBookTitle("Controls")
             }
             
             if (expanded) ChevronDownIcon() else ChevronUpIcon()
@@ -89,7 +89,7 @@ fun ControlsPanel(
         // Controls List - Collapsible
         AnimatedVisibility(visible = expanded) {
             Column {
-                StorybookDivider()
+                ComposeBookDivider()
                 
                 story?.let { s ->
                     runtimeState?.let { state ->
@@ -123,9 +123,9 @@ private fun ControlsList(
                 .padding(32.dp),
             contentAlignment = Alignment.Center
         ) {
-            StorybookBodyText(
+            ComposeBookBodyText(
                 text = "No controls available",
-                color = StorybookTheme.colors.textTertiary
+                color = ComposeBookTheme.colors.textTertiary
             )
         }
     } else {
@@ -170,7 +170,7 @@ private fun ControlItem(
             ),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        StorybookLabel(text = binding.key.uppercase())
+        ComposeBookLabel(text = binding.key.uppercase())
         
         when (val control = binding.control) {
             is TextControl -> {
@@ -216,7 +216,7 @@ private fun TextControlRenderer(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(6.dp))
-            .background(StorybookTheme.colors.surface)
+            .background(ComposeBookTheme.colors.surface)
             .padding(12.dp)
     ) {
         BasicTextField(
@@ -226,10 +226,10 @@ private fun TextControlRenderer(
                 onPropsChange(binding.setter(currentProps, newValue))
             },
             textStyle = TextStyle(
-                color = StorybookTheme.colors.textPrimary,
-                fontSize = StorybookTheme.typography.bodyMedium.fontSize
+                color = ComposeBookTheme.colors.textPrimary,
+                fontSize = ComposeBookTheme.typography.bodyMedium.fontSize
             ),
-            cursorBrush = SolidColor(StorybookTheme.colors.accent),
+            cursorBrush = SolidColor(ComposeBookTheme.colors.accent),
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -249,9 +249,9 @@ private fun BooleanControlRenderer(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        StorybookBodyText(
+        ComposeBookBodyText(
             text = control.label,
-            color = StorybookTheme.colors.textSecondary
+            color = ComposeBookTheme.colors.textSecondary
         )
         
         Switch(
@@ -261,10 +261,10 @@ private fun BooleanControlRenderer(
                 onPropsChange(binding.setter(currentProps, newValue))
             },
             colors = SwitchDefaults.colors(
-                checkedThumbColor = StorybookTheme.colors.accent,
-                checkedTrackColor = StorybookTheme.colors.accent.copy(alpha = 0.5f),
-                uncheckedThumbColor = StorybookTheme.colors.textTertiary,
-                uncheckedTrackColor = StorybookTheme.colors.surface
+                checkedThumbColor = ComposeBookTheme.colors.accent,
+                checkedTrackColor = ComposeBookTheme.colors.accent.copy(alpha = 0.5f),
+                uncheckedThumbColor = ComposeBookTheme.colors.textTertiary,
+                uncheckedTrackColor = ComposeBookTheme.colors.surface
             )
         )
     }
@@ -290,7 +290,7 @@ private fun EnumControlRendererAny(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(6.dp))
-                .background(StorybookTheme.colors.surface)
+                .background(ComposeBookTheme.colors.surface)
                 .clickable { expanded = !expanded }
                 .padding(12.dp)
         ) {
@@ -299,9 +299,9 @@ private fun EnumControlRendererAny(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                StorybookBodyText(
+                ComposeBookBodyText(
                     text = selectedValue.toString(),
-                    color = StorybookTheme.colors.textPrimary
+                    color = ComposeBookTheme.colors.textPrimary
                 )
                 if (expanded) {
                     ChevronUpIcon()
@@ -329,9 +329,9 @@ private fun EnumControlRendererAny(
                             .clip(RoundedCornerShape(6.dp))
                             .background(
                                 if (option == selectedValue) {
-                                    StorybookTheme.colors.surfaceSelected
+                                    ComposeBookTheme.colors.surfaceSelected
                                 } else {
-                                    StorybookTheme.colors.surface
+                                    ComposeBookTheme.colors.surface
                                 }
                             )
                             .clickable {
@@ -341,12 +341,12 @@ private fun EnumControlRendererAny(
                             }
                             .padding(12.dp)
                     ) {
-                        StorybookBodyText(
+                        ComposeBookBodyText(
                             text = option.toString(),
                             color = if (option == selectedValue) {
-                                StorybookTheme.colors.accent
+                                ComposeBookTheme.colors.accent
                             } else {
-                                StorybookTheme.colors.textSecondary
+                                ComposeBookTheme.colors.textSecondary
                             }
                         )
                     }

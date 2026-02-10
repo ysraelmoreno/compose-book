@@ -37,7 +37,7 @@ Estas regras **não são negociáveis**. Violá-las compromete a escalabilidade,
 ## 2. Visão Geral da Arquitetura
 
 ```
-storybook-kotlin/
+composebook-kotlin/
 ├── storybook-core/
 │   ├── api/
 │   ├── model/

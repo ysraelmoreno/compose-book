@@ -1,4 +1,4 @@
-# Getting Started with Modern Storybook UI
+# Getting Started with Modern ComposeBook UI
 
 Quick checklist to start using the new modern UI.
 
@@ -26,8 +26,8 @@ Check these files are updated:
 
 ### 4. Code Changes
 Verify these updates:
-- [ ] `MainActivity.kt` imports `ModernStorybookApp`
-- [ ] `MainActivity.kt` uses `ModernStorybookApp` instead of `StorybookApp`
+- [ ] `MainActivity.kt` imports `ModernComposeBookApp`
+- [ ] `MainActivity.kt` uses `ModernComposeBookApp` instead of `ComposeBookApp`
 - [ ] No compilation errors
 
 ## 🚀 Building the Project
@@ -41,7 +41,7 @@ Verify these updates:
 ### Option 2: Command Line
 ```bash
 # Navigate to project root
-cd /path/to/StorybookCompose
+cd /path/to/ComposeBookCompose
 
 # Clean build
 ./gradlew clean
@@ -123,10 +123,10 @@ plugins {
 ./gradlew build
 ```
 
-#### "Unresolved reference: ModernStorybookApp"
+#### "Unresolved reference: ModernComposeBookApp"
 ```kotlin
 // Check import
-import com.ysraelmorenopkg.storybook.ui.app.ModernStorybookApp
+import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
 ```
 
 #### Dependency resolution errors
@@ -143,7 +143,7 @@ import com.ysraelmorenopkg.storybook.ui.app.ModernStorybookApp
 
 #### Black screen / blank canvas
 - Check if stories are registered correctly
-- Verify `ModernStorybookApp` receives the registry
+- Verify `ModernComposeBookApp` receives the registry
 - Check logcat for errors
 
 #### Controls not working
@@ -186,8 +186,8 @@ import com.ysraelmorenopkg.storybook.ui.app.ModernStorybookApp
 3. Study [Customization Guide](customization_guide.md)
 
 ### Customize
-1. Change colors in `StorybookColors.kt`
-2. Adjust typography in `StorybookTypography.kt`
+1. Change colors in `ComposeBookColors.kt`
+2. Adjust typography in `ComposeBookTypography.kt`
 3. Create custom components
 4. Add your own stories
 
@@ -195,16 +195,16 @@ import com.ysraelmorenopkg.storybook.ui.app.ModernStorybookApp
 ```
 storybook-ui/
 ├── theme/
-│   ├── StorybookColors.kt      ← Start here
-│   ├── StorybookTypography.kt  ← Then here
-│   └── StorybookTheme.kt
+│   ├── ComposeBookColors.kt      ← Start here
+│   ├── ComposeBookTypography.kt  ← Then here
+│   └── ComposeBookTheme.kt
 ├── components/
-│   ├── StorybookButton.kt
-│   ├── StorybookText.kt
-│   ├── StorybookIcons.kt
-│   └── StorybookDivider.kt
+│   ├── ComposeBookButton.kt
+│   ├── ComposeBookText.kt
+│   ├── ComposeBookIcons.kt
+│   └── ComposeBookDivider.kt
 └── app/
-    ├── ModernStorybookApp.kt   ← Main app
+    ├── ModernComposeBookApp.kt   ← Main app
     └── ControlsPanel.kt
 ```
 
@@ -212,7 +212,7 @@ storybook-ui/
 
 ### Change to Light Theme
 ```kotlin
-ModernStorybookApp(
+ModernComposeBookApp(
     registry = registry,
     darkTheme = false  // Change to light theme
 )
@@ -220,20 +220,20 @@ ModernStorybookApp(
 
 ### Use Custom Colors
 ```kotlin
-StorybookTheme(darkTheme = true) {
+ComposeBookTheme(darkTheme = true) {
     CompositionLocalProvider(
-        LocalStorybookColors provides YourCustomColors
+        LocalComposeBookColors provides YourCustomColors
     ) {
-        ModernStorybookApp(registry = registry)
+        ModernComposeBookApp(registry = registry)
     }
 }
 ```
 
 ### Switch Back to Classic UI
 ```kotlin
-import com.ysraelmorenopkg.storybook.compose.app.StorybookApp
+import com.ysraelmorenopkg.storybook.compose.app.ComposeBookApp
 
-StorybookApp(registry = registry)
+ComposeBookApp(registry = registry)
 ```
 
 ## 🎉 Success!
