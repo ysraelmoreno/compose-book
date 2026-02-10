@@ -1,0 +1,191 @@
+---
+description: Storybook Kotlin architecture principles and patterns
+alwaysApply: true
+---
+
+# Storybook Kotlin Architecture
+
+This project is an open-source Kotlin library inspired by Storybook for showcasing Design System components and UI variations.
+
+## Non-Negotiable Principles
+
+### 1. Core Must Be UI-Independent
+The `storybook-core` module **never** imports Compose, Android, or any UI framework.
+
+```kotlin
+// ❌ FORBIDDEN in storybook-core
+import androidx.compose.runtime.Composable
+import android.view.View
+
+// ✅ CORRECT
+interface Story<Props : Any> {
+    fun render(props: Props, context: StoryContext)  // Not @Composable
+}
+```
+
+### 2. Stories Are Data, Not Screens
+Stories describe *what* to render, not navigation or routing.
+
+```kotlin
+// ❌ BAD - Story handling navigation
+val story = story(...) {
+    render { props, _ ->
+        navigateTo(ButtonScreen)
+    }
+}
+
+// ✅ GOOD - Story renders content
+val story = story(...) {
+    render { props, _ ->
+        Button(text = props.text)
+    }
+}
+```
+
+### 3. No Reflection Magic
+Props, controls, and bindings are explicit. No automatic discovery via reflection.
+
+```kotlin
+// ❌ BAD - Reflection-based
+@Control("label") 
+val text: String
+
+// ✅ GOOD - Explicit binding
+control(
+    key = "text",
+    control = TextControl("Label"),
+    getter = { it.text },
+    setter = { p, v -> p.copy(text = v) }
+)
+```
+
+### 4. Immutability by Default
+State changes create new Props instances via `copy()`. Use `data class` for Props.
+
+```kotlin
+// ❌ BAD - Mutable props
+class ButtonProps(var text: String, var enabled: Boolean)
+
+// ✅ GOOD - Immutable props
+data class ButtonProps(val text: String, val enabled: Boolean)
+```
+
+### 5. Minimal, Stable Public API
+Keep public APIs small. Prefer `internal` visibility. Open-source demands predictability.
+
+## Module Boundaries
+
+### storybook-core Structure
+```
+storybook-core/
+├── api/          # Public interfaces
+├── model/        # Story, Props, StoryId
+├── control/      # PropControl, PropBinding
+├── environment/  # StoryEnvironment, ThemeMode
+├── registry/     # StoryRegistry
+└── runtime/      # StoryRuntimeState
+```
+
+**Rule**: Core modules cannot depend on `storybook-compose`.
+
+### storybook-compose Structure
+```
+storybook-compose/
+├── canvas/       # StoryCanvas composable
+├── controls-ui/  # Control renderers
+├── navigation/   # Story browser UI
+└── app/          # Sample app
+```
+
+**Rule**: Compose modules can depend on core, but core cannot depend back.
+
+## Key Patterns
+
+### StoryId Type Safety
+```kotlin
+// ✅ Always use StoryId
+@JvmInline
+value class StoryId(val value: String)
+
+val id = StoryId("button.primary")
+```
+
+### Story Definition DSL
+```kotlin
+val ButtonStory = story(
+    id = "button.primary",
+    name = "Button / Primary",
+    defaultProps = ButtonProps("Click", true)
+) {
+    control(
+        key = "text",
+        control = TextControl("Text"),
+        getter = { it.text },
+        setter = { p, v -> p.copy(text = v) }
+    )
+    
+    control(
+        key = "enabled",
+        control = BooleanControl("Enabled"),
+        getter = { it.enabled },
+        setter = { p, v -> p.copy(enabled = v) }
+    )
+    
+    render { props, _ ->
+        Button(text = props.text, enabled = props.enabled)
+    }
+}
+```
+
+### ComposeStory Adapter
+```kotlin
+// Bridge between core (non-Composable) and Compose UI
+class ComposeStoryAdapter<Props : Any>(
+    private val content: @Composable (Props) -> Unit
+) : (Props, StoryContext) -> Unit {
+    override fun invoke(props: Props, context: StoryContext) {
+        CompositionLocalProvider(
+            LocalInspectionMode provides context.inspectionMode
+        ) {
+            content(props)
+        }
+    }
+}
+```
+
+### Environment & Context
+```kotlin
+data class StoryEnvironment(
+    val theme: ThemeMode,
+    val locale: Locale,
+    val device: DeviceProfile
+)
+
+interface StoryContext {
+    val environment: StoryEnvironment
+    val inspectionMode: Boolean  // True when running in Storybook
+}
+```
+
+## Common Mistakes to Challenge
+
+**"Why can't Story.render() be @Composable?"**
+Because core must work without Compose for future multiplatform support (iOS, Desktop, Web).
+
+**"Why explicit PropBinding instead of reflection?"**
+Reflection breaks Kotlin/Native, increases binary size, and makes behavior unpredictable in multiplatform.
+
+**"Can I add a helper to navigate between stories in core?"**
+No. Navigation is a UI concern. Core only models data.
+
+**"Should I add convenience methods to Story interface?"**
+Probably not. Every public API addition is a long-term commitment. Keep it minimal.
+
+## Project Philosophy
+
+This is **not** a Kotlin port of Storybook JS. It's a Kotlin-native tool for:
+- Design System component showcasing
+- Explicit state exploration
+- Real componentization patterns
+
+**Core rule**: If the core is weak, nothing else matters. If the core is strong, everything else follows.
