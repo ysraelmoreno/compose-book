@@ -1,0 +1,179 @@
+---
+description: Storybook Kotlin MVP scope - what this project IS and ISN'T
+alwaysApply: true
+---
+
+# Storybook Kotlin - MVP Scope Definition
+
+## What This Project IS
+
+A **conceptual validation** of a Kotlin-native library for showcasing Design System components. The MVP exists to prove:
+
+1. The core is solid and UI-independent
+2. The Story API is usable day-to-day
+3. Components can be rendered and edited predictably
+
+**Target users**: Internal product teams, future open-source adopters
+
+## What This Project IS NOT
+
+- ❌ A UI showcase tool
+- ❌ A Kotlin port of Storybook JS
+- ❌ A navigation framework
+- ❌ A visual testing platform (yet)
+- ❌ A multiplatform library (yet)
+
+## MVP Scope Boundaries
+
+### ✅ IN SCOPE - Must Have
+
+- `storybook-core` module (functional, stable)
+- `storybook-compose` module (Android only, minimal)
+- Manual story registration
+- Simple navigation panel
+- Canvas rendering
+- Basic editable controls (Text, Boolean, Enum only)
+- Theme support (Light/Dark)
+
+### ❌ OUT OF SCOPE - Explicitly Excluded
+
+- State persistence
+- Visual snapshots
+- Code generation
+- Multiplatform support
+- Gradle plugin
+- Polished UI/UX
+- Deep linking
+- Auto-discovery of stories
+- Advanced controls (Color, Number, Date, etc.)
+
+**Golden Rule**: If it doesn't validate the conceptual model, it's out of scope.
+
+## Module Deliverables
+
+### storybook-core
+**Public API** (nothing more):
+- `Story`
+- `StoryId`
+- `StoryBuilder`
+- `PropControl` (Text, Boolean, Enum only)
+- `PropBinding`
+- `StoryRegistry` (InMemoryStoryRegistry)
+- `StoryEnvironment`
+- `StoryContext`
+
+### storybook-compose
+**Minimal components**:
+- `StorybookApp` shell (3-panel layout: sidebar, controls, canvas)
+- `StoryCanvas` (renders story with environment)
+- Basic control renderers (TextField, Switch, Dropdown)
+- Local state management (`remember`)
+
+### storybook-samples
+**Proof of usability**:
+- 2 components minimum
+- 2 stories each
+- Examples: Button (Primary, Disabled), Card (Default, With Image)
+
+## Success Criteria
+
+The MVP is complete when:
+
+1. ✅ External dev can create a story without reading internal code
+2. ✅ Props can be modified at runtime
+3. ✅ Same component supports multiple variations
+4. ✅ Core has zero Compose/Android dependencies
+5. ✅ Zero reflection usage
+
+**If any criterion fails, the MVP fails.**
+
+## Common Scope Creep (Challenge These)
+
+### "Let's polish the UI a bit"
+**No.** UI quality is not an MVP goal. Function over form.
+
+### "Let's prepare for multiplatform now"
+**No.** Validate the model on Android first. Multiplatform is Phase 2.
+
+### "We can clean up the core later"
+**No.** The core must be clean NOW. Post-MVP, the API freezes.
+
+### "Let's add auto-discovery of stories"
+**No.** Manual registration keeps the model simple and multiplatform-friendly.
+
+### "Let's add just one more control type"
+**Why?** If Text, Boolean, and Enum don't prove the model, what will?
+
+### "This feature is quick to add"
+**Irrelevant.** Speed doesn't justify scope creep. Does it validate the model?
+
+## Decision Framework
+
+When evaluating ANY new feature or change, ask:
+
+```
+Does this validate the conceptual model?
+├─ Yes → Is it simpler than the current approach?
+│         ├─ Yes → Consider it
+│         └─ No → Reject it
+└─ No → REJECT IT
+```
+
+**Examples:**
+
+| Proposal | Validates Model? | Decision |
+|----------|------------------|----------|
+| Add ColorControl | No | ❌ Reject - 3 controls are enough |
+| Improve TextControl UI | No | ❌ Reject - UI polish is out of scope |
+| Add Story.description | Partially | ❌ Reject - not critical for validation |
+| Fix PropBinding immutability bug | Yes | ✅ Accept - core to the model |
+| Add state persistence | No | ❌ Reject - post-MVP feature |
+
+## Post-MVP Roadmap (Do NOT Implement Now)
+
+After internal validation:
+1. Freeze core API
+2. Mark experimental APIs
+3. Open repository publicly
+4. Collect real feedback
+
+**Without real validation, there is no roadmap.**
+
+## Anti-Patterns to Prevent
+
+```kotlin
+// ❌ Adding "nice to have" features
+class ColorControl(...) // NOT in MVP scope
+
+// ❌ Premature optimization
+@Serializable // Persistence is post-MVP
+data class StoryRuntimeState
+
+// ❌ UI improvements
+fun StorybookApp() {
+    MaterialTheme { // Keep it basic
+        // ...beautiful gradient backgrounds...
+    }
+}
+
+// ✅ CORRECT - Minimal, functional
+fun StorybookApp(registry: StoryRegistry) {
+    Row {
+        StorySidebar()
+        ControlsPanel()
+        StoryCanvas()
+    }
+}
+```
+
+## How to Handle Feature Requests
+
+**User**: "Can we add [feature X]?"
+
+**Response template**:
+1. "Does this validate the core model (stories, props, controls, environment)?"
+2. If no: "That's a post-MVP feature. Let's validate the model first."
+3. If yes: "Can we prove the model without this?"
+4. If yes: "Then it's not MVP-critical."
+
+**Be the scope guardian. Validation over features.**
