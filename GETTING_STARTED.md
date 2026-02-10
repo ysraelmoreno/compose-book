@@ -7,22 +7,22 @@ Quick checklist to start using the new modern UI.
 ### 1. Gradle Sync
 - [ ] Open the project in Android Studio
 - [ ] Wait for Gradle sync to complete
-- [ ] Verify `storybook-ui` module is recognized
+- [ ] Verify `composebook-ui` module is recognized
 - [ ] Check for any dependency errors
 
 ### 2. Module Structure
 Verify these modules exist:
-- [ ] `storybook-core` - Core functionality
-- [ ] `storybook-compose` - Compose adapter
-- [ ] `storybook-ui` - Modern UI (NEW)
-- [ ] `storybook-samples` - Sample stories
+- [ ] `composebook-core` - Core functionality
+- [ ] `composebook-compose` - Compose adapter
+- [ ] `composebook-ui` - Modern UI (NEW)
+- [ ] `composebook-samples` - Sample stories
 - [ ] `app` - Demo application
 
 ### 3. Build Configuration
 Check these files are updated:
-- [ ] `settings.gradle.kts` includes `:storybook-ui`
-- [ ] `app/build.gradle.kts` depends on `storybook-ui`
-- [ ] `storybook-ui/build.gradle.kts` has correct dependencies
+- [ ] `settings.gradle.kts` includes `:composebook-ui`
+- [ ] `app/build.gradle.kts` depends on `composebook-ui`
+- [ ] `composebook-ui/build.gradle.kts` has correct dependencies
 
 ### 4. Code Changes
 Verify these updates:
@@ -50,7 +50,7 @@ cd /path/to/ComposeBookCompose
 ./gradlew build
 
 # Build specific module
-./gradlew :storybook-ui:build
+./gradlew :composebook-ui:build
 
 # Build and install app
 ./gradlew :app:installDebug
@@ -109,14 +109,14 @@ When the app launches, you should see:
 ### Build Errors
 
 #### "Compose Compiler Gradle plugin is required"
-This has been fixed! The `storybook-ui/build.gradle.kts` now includes:
+This has been fixed! The `composebook-ui/build.gradle.kts` now includes:
 ```kotlin
 plugins {
     alias(libs.plugins.kotlin.compose) // ✅ Added
 }
 ```
 
-#### "Module storybook-ui not found"
+#### "Module composebook-ui not found"
 ```bash
 # Solution: Sync Gradle
 ./gradlew --stop
@@ -193,7 +193,7 @@ import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
 
 ### Explore Code
 ```
-storybook-ui/
+composebook-ui/
 ├── theme/
 │   ├── ComposeBookColors.kt      ← Start here
 │   ├── ComposeBookTypography.kt  ← Then here
@@ -257,9 +257,9 @@ If you see:
 - `docs/customization_guide.md` - How to customize
 
 ### Code Examples
-- Look at `storybook-samples/` for story examples
+- Look at `composebook-samples/` for story examples
 - Check `app/MainActivity.kt` for usage
-- Review `storybook-ui/` for implementation details
+- Review `composebook-ui/` for implementation details
 
 ### Common Issues
 1. **Gradle sync fails**: `./gradlew --stop && ./gradlew build`

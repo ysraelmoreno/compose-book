@@ -4,7 +4,7 @@
 
 Successfully modernized the ComposeBook Kotlin UI from a generic Material Design interface to a professional, custom design system inspired by ComposeBook JS 7+.
 
-## New Module: `storybook-ui`
+## New Module: `composebook-ui`
 
 Created a completely new module with custom design system components:
 
@@ -82,34 +82,34 @@ Text Secondary:  #B3B3B3  // Medium contrast
 ## Files Created
 
 ### Core Theme
-1. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/theme/ComposeBookColors.kt`
-2. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/theme/ComposeBookTypography.kt`
-3. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/theme/ComposeBookTheme.kt`
+1. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/theme/ComposeBookColors.kt`
+2. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/theme/ComposeBookTypography.kt`
+3. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/theme/ComposeBookTheme.kt`
 
 ### Components
-4. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/components/ComposeBookButton.kt`
-5. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/components/ComposeBookText.kt`
-6. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/components/ComposeBookDivider.kt`
-7. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/components/ComposeBookIcons.kt`
+4. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/components/ComposeBookButton.kt`
+5. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/components/ComposeBookText.kt`
+6. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/components/ComposeBookDivider.kt`
+7. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/components/ComposeBookIcons.kt`
 
 ### Application
-8. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/app/ModernComposeBookApp.kt`
-9. `storybook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/app/ControlsPanel.kt`
+8. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/app/ModernComposeBookApp.kt`
+9. `composebook-ui/src/main/kotlin/com/ysraelmorenopkg/storybook/ui/app/ControlsPanel.kt`
 
 ### Configuration
-10. `storybook-ui/build.gradle.kts`
-11. `storybook-ui/src/main/AndroidManifest.xml`
-12. `storybook-ui/proguard-rules.pro`
-13. `storybook-ui/consumer-rules.pro`
-14. `storybook-ui/.gitignore`
-15. `storybook-ui/README.md`
+10. `composebook-ui/build.gradle.kts`
+11. `composebook-ui/src/main/AndroidManifest.xml`
+12. `composebook-ui/proguard-rules.pro`
+13. `composebook-ui/consumer-rules.pro`
+14. `composebook-ui/.gitignore`
+15. `composebook-ui/README.md`
 
 ### Documentation
 16. `docs/modern_ui_implementation.md`
 
 ### Project Updates
-17. Updated `settings.gradle.kts` to include `:storybook-ui`
-18. Updated `app/build.gradle.kts` to depend on `storybook-ui`
+17. Updated `settings.gradle.kts` to include `:composebook-ui`
+18. Updated `app/build.gradle.kts` to depend on `composebook-ui`
 19. Updated `app/src/main/kotlin/.../MainActivity.kt` to use `ModernComposeBookApp`
 20. Updated main `README.md` with new UI options
 
@@ -153,7 +153,7 @@ setContent {
 - ✅ Smooth animations and transitions
 
 ### Technical
-- ✅ Separate module (`storybook-ui`) for modularity
+- ✅ Separate module (`composebook-ui`) for modularity
 - ✅ Independent design system
 - ✅ No Material Theme dependency in UI
 - ✅ Custom components for full control
@@ -163,7 +163,7 @@ setContent {
 ## Next Steps
 
 ### To Use
-1. Sync Gradle to include the new `storybook-ui` module
+1. Sync Gradle to include the new `composebook-ui` module
 2. Run the app - it now uses `ModernComposeBookApp`
 3. Explore the dark theme and retractable panels
 

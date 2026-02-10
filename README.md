@@ -26,13 +26,13 @@ A library for:
 
 ComposeBook provides two UI implementations:
 
-### 1. Modern Custom Design System (`storybook-ui` module)
+### 1. Modern Custom Design System (`composebook-ui` module)
 - Custom design system inspired by Storybook JS 7+
 - Dark/Light theme support
 - Professional developer tool aesthetics
 - No Material Design dependencies
 
-### 2. Classic Material Theme (`storybook-compose` module)
+### 2. Classic Material Theme (`composebook-compose` module)
 - Traditional Material Design 3 look
 - Familiar Android UI patterns
 - Lighter weight option
@@ -296,7 +296,7 @@ Modern UI with custom design system:
 
 ```
 composebook-ui/
-├── theme/        # StorybookColors, StorybookTypography, StorybookTheme
+├── theme/        # ComposeBookColors, ComposeBookTypography, ComposeBookTheme
 ├── components/   # Custom buttons, text, icons, dividers
 └── app/          # ModernComposeBookApp, ControlsPanel
 ```

@@ -16,7 +16,7 @@ The original implementation used Material Theme components, which:
 ### Module Structure
 
 ```
-storybook-ui/
+composebook-ui/
 ├── theme/
 │   ├── ComposeBookColors.kt      # Custom color system
 │   ├── ComposeBookTypography.kt  # Typography definitions
@@ -159,7 +159,7 @@ ModernComposeBookApp(
 - ✅ More screen space for component preview
 
 ### Technical Benefits
-- ✅ Separate UI module (storybook-ui)
+- ✅ Separate UI module (composebook-ui)
 - ✅ Independent design system
 - ✅ No Material Theme dependency in core
 - ✅ Custom components for full control
@@ -284,7 +284,7 @@ ComposeBookTheme(darkTheme = true) {
 
 The modern UI implementation provides a professional, familiar interface for ComposeBook Kotlin users while maintaining the MVP scope. The custom design system gives full control over the appearance and creates a distinctive identity separate from generic Material Design apps.
 
-The modular architecture (separate `storybook-ui` module) allows users to:
+The modular architecture (separate `composebook-ui` module) allows users to:
 1. Use the modern UI (recommended)
 2. Use the basic Material Theme version
 3. Create their own custom UI

@@ -17,9 +17,9 @@ O backlog está organizado em **épicos sequenciais**. Cada épico só deve come
 
 ```
 Épico 0 — Setup e governança
-Épico 1 — storybook-core (modelo)
+Épico 1 — composebook-core (modelo)
 Épico 2 — Registry e runtime
-Épico 3 — storybook-compose (adaptação)
+Épico 3 — composebook-compose (adaptação)
 Épico 4 — UI Shell mínima
 Épico 5 — Controls UI
 Épico 6 — Samples e validação
@@ -40,9 +40,9 @@ Criar o repositório `composebook-kotlin` com estrutura inicial de módulos.
 - Criar repositório Git
 - Configurar Gradle Kotlin DSL
 - Criar módulos vazios:
-  - `storybook-core`
-  - `storybook-compose`
-  - `storybook-samples`
+  - `composebook-core`
+  - `composebook-compose`
+  - `composebook-samples`
 
 **Critérios de aceite**
 - Build executa sem erros
@@ -69,7 +69,7 @@ Adicionar documentação mínima para orientar contribuidores.
 
 ---
 
-## Épico 1 — storybook-core: Modelo Fundamental
+## Épico 1 — composebook-core: Modelo Fundamental
 
 ### Issue 1.1 — Implementar StoryId
 
@@ -193,7 +193,7 @@ Representar estado atual do story.
 
 ---
 
-## Épico 4 — storybook-compose: Adaptação
+## Épico 4 — composebook-compose: Adaptação
 
 ### Issue 4.1 — Criar adaptador Compose
 

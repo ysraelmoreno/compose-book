@@ -19,9 +19,9 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "StorybookCompose"
+rootProject.name = "ComposeBookCompose"
 include(":app")
-include(":storybook-core")
-include(":storybook-compose")
-include(":storybook-ui")
-include(":storybook-samples")
+include(":composebook-core")
+include(":composebook-compose")
+include(":composebook-ui")
+include(":composebook-samples")

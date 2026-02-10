@@ -38,7 +38,7 @@ Estas regras **não são negociáveis**. Violá-las compromete a escalabilidade,
 
 ```
 composebook-kotlin/
-├── storybook-core/
+├── composebook-core/
 │   ├── api/
 │   ├── model/
 │   ├── control/
@@ -46,20 +46,20 @@ composebook-kotlin/
 │   ├── registry/
 │   └── runtime/
 │
-├── storybook-compose/
+├── composebook-compose/
 │   ├── canvas/
 │   ├── controls-ui/
 │   ├── navigation/
 │   └── app/
 │
-├── storybook-compose-mpp/   (opcional)
-├── storybook-samples/
+├── composebook-compose-mpp/   (opcional)
+├── composebook-samples/
 └── storybook-gradle-plugin/ (futuro)
 ```
 
 ---
 
-## 3. storybook-core
+## 3. composebook-core
 
 O módulo **mais importante** do projeto. Tudo que estiver aqui deve funcionar sem Compose.
 
@@ -269,7 +269,7 @@ Permite:
 
 ---
 
-## 9. storybook-compose
+## 9. composebook-compose
 
 Primeira implementação oficial de UI baseada em Jetpack Compose.
 
@@ -346,7 +346,7 @@ class ControlRendererRegistry {
 ## 10. Samples (Obrigatório)
 
 ```
-storybook-samples/
+composebook-samples/
 ├── button/
 │   ├── ButtonProps.kt
 │   ├── ButtonStory.kt

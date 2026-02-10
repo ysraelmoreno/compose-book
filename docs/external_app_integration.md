@@ -9,8 +9,8 @@ Quick guide for integrating Storybook Kotlin into your existing app with your ow
 ```kotlin
 // In your app/build.gradle.kts
 dependencies {
-    implementation(project(":storybook-core"))
-    implementation(project(":storybook-compose"))
+    implementation(project(":composebook-core"))
+    implementation(project(":composebook-compose"))
 }
 ```
 
@@ -171,8 +171,8 @@ class StorybookActivity : ComponentActivity() {
 
 ```kotlin
 dependencies {
-    debugImplementation(project(":storybook-core"))
-    debugImplementation(project(":storybook-compose"))
+    debugImplementation(project(":composebook-core"))
+    debugImplementation(project(":composebook-compose"))
 }
 ```
 
