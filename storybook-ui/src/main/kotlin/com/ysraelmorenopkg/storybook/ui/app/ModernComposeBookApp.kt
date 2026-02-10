@@ -32,11 +32,11 @@ import com.ysraelmorenopkg.storybook.ui.components.BookIcon
 import com.ysraelmorenopkg.storybook.ui.components.ChevronDownIcon
 import com.ysraelmorenopkg.storybook.ui.components.ChevronRightIcon
 import com.ysraelmorenopkg.storybook.ui.components.ChevronUpIcon
-import com.ysraelmorenopkg.storybook.ui.components.StorybookBodyText
-import com.ysraelmorenopkg.storybook.ui.components.StorybookDivider
-import com.ysraelmorenopkg.storybook.ui.components.StorybookLabel
-import com.ysraelmorenopkg.storybook.ui.components.StorybookTitle
-import com.ysraelmorenopkg.storybook.ui.theme.StorybookTheme
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookBodyText
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookDivider
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookLabel
+import com.ysraelmorenopkg.storybook.ui.components.ComposeBookTitle
+import com.ysraelmorenopkg.storybook.ui.theme.ComposeBookTheme
 
 /**
  * Modern Storybook App with custom design system.
@@ -51,12 +51,12 @@ import com.ysraelmorenopkg.storybook.ui.theme.StorybookTheme
  * @param darkTheme Whether to use dark theme (default: true)
  */
 @Composable
-fun ModernStorybookApp(
+fun ModernComposeBookApp(
     registry: StoryRegistry,
     modifier: Modifier = Modifier,
     darkTheme: Boolean = true
 ) {
-    StorybookTheme(darkTheme = darkTheme) {
+    ComposeBookTheme(darkTheme = darkTheme) {
         val stories = registry.getAll().filterIsInstance<ComposeStory<*>>()
         
         var selectedStory by remember { mutableStateOf<ComposeStory<*>?>(stories.firstOrNull()) }
@@ -80,7 +80,7 @@ fun ModernStorybookApp(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .background(StorybookTheme.colors.background)
+                .background(ComposeBookTheme.colors.background)
         ) {
             // Top - Stories Header
             if (stories.isNotEmpty()) {
@@ -96,7 +96,10 @@ fun ModernStorybookApp(
                             environment = StoryEnvironment.Default
                         )
                         storiesExpanded = false
-                    }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 250.dp) // Limit header height when expanded
                 )
             }
             
@@ -160,7 +163,7 @@ private fun StoriesHeader(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(bottomStart = 8.dp, bottomEnd = 8.dp))
-                .background(StorybookTheme.colors.backgroundElevated)
+                .background(ComposeBookTheme.colors.backgroundElevated)
                 .clickable { onExpandedChange(!expanded) }
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -171,7 +174,7 @@ private fun StoriesHeader(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 BookIcon()
-                StorybookTitle("Stories")
+                ComposeBookTitle("Stories")
             }
             
             Row(
@@ -179,9 +182,9 @@ private fun StoriesHeader(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 selectedStory?.let {
-                    StorybookLabel(
+                    ComposeBookLabel(
                         text = it.name,
-                        color = StorybookTheme.colors.textSecondary
+                        color = ComposeBookTheme.colors.textSecondary
                     )
                 }
                 if (expanded) ChevronUpIcon() else ChevronDownIcon()
@@ -194,7 +197,7 @@ private fun StoriesHeader(
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(max = 400.dp)
-                    .background(StorybookTheme.colors.backgroundElevated)
+                    .background(ComposeBookTheme.colors.backgroundElevated)
             ) {
                 groupedStories.forEach { (category, storiesInCategory) ->
                     item(key = "category_$category") {
@@ -228,7 +231,7 @@ private fun StoriesHeader(
             }
         }
         
-        StorybookDivider()
+        ComposeBookDivider()
     }
 }
 
@@ -252,9 +255,9 @@ private fun CategoryItem(
             ChevronRightIcon(size = 14.dp)
         }
         
-        StorybookBodyText(
+        ComposeBookBodyText(
             text = category,
-            color = StorybookTheme.colors.textPrimary
+            color = ComposeBookTheme.colors.textPrimary
         )
     }
 }
@@ -266,9 +269,9 @@ private fun StoryListItem(
     onClick: () -> Unit
 ) {
     val backgroundColor = if (isSelected) {
-        StorybookTheme.colors.surfaceSelected
+        ComposeBookTheme.colors.surfaceSelected
     } else {
-        StorybookTheme.colors.backgroundElevated
+        ComposeBookTheme.colors.backgroundElevated
     }
     
     Row(
@@ -278,12 +281,12 @@ private fun StoryListItem(
             .clickable(onClick = onClick)
             .padding(start = 40.dp, end = 16.dp, top = 10.dp, bottom = 10.dp)
     ) {
-        StorybookBodyText(
+        ComposeBookBodyText(
             text = storyName,
             color = if (isSelected) {
-                StorybookTheme.colors.accent
+                ComposeBookTheme.colors.accent
             } else {
-                StorybookTheme.colors.textSecondary
+                ComposeBookTheme.colors.textSecondary
             }
         )
     }
@@ -317,16 +320,16 @@ private fun EmptyStateContent() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            BookIcon(size = 48.dp, color = StorybookTheme.colors.textTertiary)
+            BookIcon(size = 48.dp, color = ComposeBookTheme.colors.textTertiary)
             
-            StorybookTitle(
+            ComposeBookTitle(
                 text = "No Stories Found",
-                color = StorybookTheme.colors.textPrimary
+                color = ComposeBookTheme.colors.textPrimary
             )
             
-            StorybookBodyText(
+            ComposeBookBodyText(
                 text = "Register ComposeStory instances using StoryRegistry",
-                color = StorybookTheme.colors.textTertiary
+                color = ComposeBookTheme.colors.textTertiary
             )
         }
     }

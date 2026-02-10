@@ -25,7 +25,7 @@ class StorybookActivity : ComponentActivity() {
         registerYourStories(registry)
         
         setContent {
-            StorybookApp(
+            ComposeBookApp(
                 registry = registry,
                 theme = { content ->
                     YourAppTheme {  // Your existing theme!
@@ -102,7 +102,7 @@ The `theme` parameter accepts any `@Composable` wrapper:
 
 ```kotlin
 // Example 1: Material 3 with custom colors
-StorybookApp(
+ComposeBookApp(
     registry = registry,
     theme = { content ->
         MaterialTheme(
@@ -115,7 +115,7 @@ StorybookApp(
 )
 
 // Example 2: Your design system theme
-StorybookApp(
+ComposeBookApp(
     registry = registry,
     theme = { content ->
         YourDesignSystemTheme(
@@ -128,7 +128,7 @@ StorybookApp(
 )
 
 // Example 3: Multiple theme layers
-StorybookApp(
+ComposeBookApp(
     registry = registry,
     theme = { content ->
         YourAppTheme {
@@ -216,7 +216,7 @@ val layoutsRegistry = InMemoryStoryRegistry()
 val iconsRegistry = InMemoryStoryRegistry()
 
 // Show different tabs or screens
-StorybookApp(registry = componentsRegistry)
+ComposeBookApp(registry = componentsRegistry)
 ```
 
 ## Benefits

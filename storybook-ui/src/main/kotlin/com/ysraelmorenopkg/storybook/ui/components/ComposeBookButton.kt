@@ -11,20 +11,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.ysraelmorenopkg.storybook.ui.theme.StorybookTheme
+import com.ysraelmorenopkg.storybook.ui.theme.ComposeBookTheme
 
 /**
- * Custom button component for Storybook UI.
+ * Custom button component for ComposeBook UI.
  * 
  * Styled to match Storybook JS button design with subtle rounded corners
  * and hover states.
  */
 @Composable
-fun StorybookButton(
+fun ComposeBookButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = StorybookTheme.colors.surface,
-    contentColor: Color = StorybookTheme.colors.textPrimary,
+    backgroundColor: Color = ComposeBookTheme.colors.surface,
+    contentColor: Color = ComposeBookTheme.colors.textPrimary,
     content: @Composable () -> Unit
 ) {
     Box(
@@ -43,7 +43,7 @@ fun StorybookButton(
  * Icon button variant for toolbar actions.
  */
 @Composable
-fun StorybookIconButton(
+fun ComposeBookIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit

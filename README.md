@@ -22,6 +22,21 @@ A library for:
 - ❌ A navigation or routing framework
 - ❌ A production-ready library (yet - this is MVP)
 
+## UI Options
+
+ComposeBook provides two UI implementations:
+
+### 1. Modern Custom Design System (`storybook-ui` module)
+- Custom design system inspired by Storybook JS 7+
+- Dark/Light theme support
+- Professional developer tool aesthetics
+- No Material Design dependencies
+
+### 2. Classic Material Theme (`storybook-compose` module)
+- Traditional Material Design 3 look
+- Familiar Android UI patterns
+- Lighter weight option
+
 ## Architecture
 
 ### Modules
@@ -106,7 +121,7 @@ val registry = InMemoryStoryRegistry()
 registry.register(ButtonStory)
 ```
 
-### 5. Launch Storybook
+### 5. Launch ComposeBook
 
 ```kotlin
 class MainActivity : ComponentActivity() {
@@ -118,13 +133,13 @@ class MainActivity : ComponentActivity() {
         
         setContent {
             // Modern UI with custom design system (Recommended)
-            ModernStorybookApp(
+            ModernComposeBookApp(
                 registry = registry,
                 darkTheme = true
             )
             
             // OR: Classic UI with Material Theme
-            StorybookApp(
+            ComposeBookApp(
                 registry = registry,
                 theme = { content ->
                     MyAppTheme {
@@ -149,9 +164,9 @@ Professional interface inspired by Storybook JS 7+ with:
 - Custom icons and components
 
 ```kotlin
-import com.ysraelmorenopkg.composebook.ui.app.ModernStorybookApp
+import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
 
-ModernStorybookApp(
+ModernComposeBookApp(
     registry = registry,
     darkTheme = true // or false for light theme
 )
@@ -171,9 +186,9 @@ See [Modern UI Documentation](docs/modern_ui_implementation.md) for details.
 Simple Material Theme-based interface:
 
 ```kotlin
-import com.ysraelmorenopkg.composebook.compose.app.StorybookApp
+import com.ysraelmorenopkg.storybook.compose.app.ComposeBookApp
 
-StorybookApp(
+ComposeBookApp(
     registry = registry,
     theme = { content ->
         MyAppTheme { content() }
@@ -185,11 +200,11 @@ StorybookApp(
 
 ### Custom Theme
 
-The Storybook UI can be themed to match your app's design system:
+The ComposeBook UI can be themed to match your app's design system:
 
 ```kotlin
-// Use your app's theme for the Storybook UI
-StorybookApp(
+// Use your app's theme for the ComposeBook UI
+ComposeBookApp(
     registry = registry,
     theme = { content ->
         MyDesignSystemTheme(
@@ -209,7 +224,7 @@ StorybookApp(
 - Dividers and surface colors
 - Typography styles
 
-**Note:** The canvas area renders your components with their own theme (via StoryEnvironment), so your components maintain their original appearance while the Storybook UI uses your theme.
+**Note:** The canvas area renders your components with their own theme (via StoryEnvironment), so your components maintain their original appearance while the ComposeBook UI uses your theme.
 
 ## MVP Features
 
@@ -272,7 +287,7 @@ composebook-compose/
 ├── adapter/      # ComposeStory, ComposeStoryBuilder
 ├── canvas/       # StoryCanvas
 ├── controls/     # Control renderers (TextField, Switch, etc.)
-└── app/          # Classic StorybookApp
+└── app/          # Classic ComposeBookApp
 ```
 
 ### composebook-ui
@@ -283,7 +298,7 @@ Modern UI with custom design system:
 composebook-ui/
 ├── theme/        # StorybookColors, StorybookTypography, StorybookTheme
 ├── components/   # Custom buttons, text, icons, dividers
-└── app/          # ModernStorybookApp, ControlsPanel
+└── app/          # ModernComposeBookApp, ControlsPanel
 ```
 
 ## Examples

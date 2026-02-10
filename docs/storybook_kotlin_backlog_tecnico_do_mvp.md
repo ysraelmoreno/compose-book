@@ -34,7 +34,7 @@ O backlog está organizado em **épicos sequenciais**. Cada épico só deve come
 ### Issue 0.1 — Criar repositório e estrutura base
 
 **Descrição**  
-Criar o repositório `storybook-kotlin` com estrutura inicial de módulos.
+Criar o repositório `composebook-kotlin` com estrutura inicial de módulos.
 
 **Tarefas**
 - Criar repositório Git

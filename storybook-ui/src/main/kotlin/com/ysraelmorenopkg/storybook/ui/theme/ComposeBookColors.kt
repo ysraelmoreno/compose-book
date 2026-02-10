@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
  * - High contrast text for readability
  */
 @Immutable
-data class StorybookColors(
+data class ComposeBookColors(
     // Background colors
     val background: Color,
     val backgroundElevated: Color,
@@ -48,7 +48,7 @@ data class StorybookColors(
         /**
          * Dark theme inspired by Storybook JS 7+
          */
-        val Dark = StorybookColors(
+        val Dark = ComposeBookColors(
             // Backgrounds - Deep dark blues/grays
             background = Color(0xFF1A1A1A),
             backgroundElevated = Color(0xFF262626),
@@ -83,7 +83,7 @@ data class StorybookColors(
         /**
          * Light theme for daylight usage
          */
-        val Light = StorybookColors(
+        val Light = ComposeBookColors(
             // Backgrounds
             background = Color(0xFFF6F9FC),
             backgroundElevated = Color(0xFFFFFFFF),

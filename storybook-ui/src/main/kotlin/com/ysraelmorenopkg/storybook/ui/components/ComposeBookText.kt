@@ -5,32 +5,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import com.ysraelmorenopkg.storybook.ui.theme.StorybookTheme
+import com.ysraelmorenopkg.storybook.ui.theme.ComposeBookTheme
 
 /**
- * Text components using Storybook typography system.
+ * Text components using ComposeBook typography system.
  */
 
 @Composable
-fun StorybookTitle(
+fun ComposeBookTitle(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = StorybookTheme.colors.textPrimary
+    color: Color = ComposeBookTheme.colors.textPrimary
 ) {
     Text(
         text = text,
-        style = StorybookTheme.typography.titleMedium,
+        style = ComposeBookTheme.typography.titleMedium,
         color = color,
         modifier = modifier
     )
 }
 
 @Composable
-fun StorybookBodyText(
+fun ComposeBookBodyText(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = StorybookTheme.colors.textSecondary,
-    style: TextStyle = StorybookTheme.typography.bodyMedium
+    color: Color = ComposeBookTheme.colors.textSecondary,
+    style: TextStyle = ComposeBookTheme.typography.bodyMedium
 ) {
     Text(
         text = text,
@@ -41,14 +41,14 @@ fun StorybookBodyText(
 }
 
 @Composable
-fun StorybookLabel(
+fun ComposeBookLabel(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = StorybookTheme.colors.textTertiary
+    color: Color = ComposeBookTheme.colors.textTertiary
 ) {
     Text(
         text = text,
-        style = StorybookTheme.typography.labelMedium,
+        style = ComposeBookTheme.typography.labelMedium,
         color = color,
         modifier = modifier
     )

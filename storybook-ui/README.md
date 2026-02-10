@@ -1,10 +1,10 @@
-# Storybook UI Module
+# ComposeBook UI Module
 
-Custom design system and modern UI components for Storybook Kotlin.
+Custom design system and modern UI components for ComposeBook Kotlin.
 
 ## Overview
 
-This module provides a modern, professional interface inspired by Storybook JS 7+. It replaces the default Material Design look with a custom design system optimized for developer tools and component showcases.
+This module provides a modern, professional interface inspired by ComposeBook JS 7+. It replaces the default Material Design look with a custom design system optimized for developer tools and component showcases.
 
 ## Features
 
@@ -12,33 +12,33 @@ This module provides a modern, professional interface inspired by Storybook JS 7
 - **Dark Theme by Default**: Optimized for developer workflows
 - **Light Theme Support**: Alternative theme for daylight usage
 - **Modern Layout**: Retractable sidebar and controls panel
-- **Custom Icons**: SVG-style minimal icons matching Storybook JS
+- **Custom Icons**: SVG-style minimal icons matching ComposeBook JS
 - **Professional Components**: Custom buttons, text, dividers, and controls
 
 ## Design System Components
 
 ### Theme
-- `StorybookTheme`: Main theme provider
-- `StorybookColors`: Color system (Dark/Light variants)
-- `StorybookTypography`: Typography system
+- `ComposeBookTheme`: Main theme provider
+- `ComposeBookColors`: Color system (Dark/Light variants)
+- `ComposeBookTypography`: Typography system
 
 ### UI Components
-- `StorybookButton`: Custom button components
-- `StorybookIconButton`: Icon-only buttons for toolbars
-- `StorybookText`: Text components with theme integration
-- `StorybookDivider`: Subtle borders and separators
-- `StorybookIcons`: Custom SVG-style icons
+- `ComposeBookButton`: Custom button components
+- `ComposeBookIconButton`: Icon-only buttons for toolbars
+- `ComposeBookText`: Text components with theme integration
+- `ComposeBookDivider`: Subtle borders and separators
+- `ComposeBookIcons`: Custom SVG-style icons
 
 ### Application
-- `ModernStorybookApp`: Main application shell with modern UI
-- `ControlsPanel`: Custom controls panel matching Storybook JS design
+- `ModernComposeBookApp`: Main application shell with modern UI
+- `ControlsPanel`: Custom controls panel matching ComposeBook JS design
 
 ## Usage
 
 ```kotlin
-import com.ysraelmorenopkg.storybook.ui.app.ModernStorybookApp
+import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
 
-ModernStorybookApp(
+ModernComposeBookApp(
     registry = yourRegistry,
     darkTheme = true
 )
@@ -49,7 +49,7 @@ ModernStorybookApp(
 ### Dark Theme
 - Background: `#1A1A1A`
 - Surface: `#262626`
-- Accent: `#029CFD` (Storybook blue)
+- Accent: `#029CFD` (ComposeBook blue)
 - Text Primary: `#E8E8E8`
 - Text Secondary: `#B3B3B3`
 

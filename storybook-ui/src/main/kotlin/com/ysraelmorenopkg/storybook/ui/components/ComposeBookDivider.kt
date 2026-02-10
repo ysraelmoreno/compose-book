@@ -8,13 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ysraelmorenopkg.storybook.ui.theme.StorybookTheme
+import com.ysraelmorenopkg.storybook.ui.theme.ComposeBookTheme
 
 /**
  * Custom divider matching Storybook JS subtle borders.
  */
 @Composable
-fun StorybookDivider(
+fun ComposeBookDivider(
     modifier: Modifier = Modifier,
     thickness: Dp = 1.dp
 ) {
@@ -22,6 +22,6 @@ fun StorybookDivider(
         modifier = modifier
             .fillMaxWidth()
             .height(thickness)
-            .background(StorybookTheme.colors.border)
+            .background(ComposeBookTheme.colors.border)
     )
 }

@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ysraelmorenopkg.storybook.ui.theme.StorybookTheme
+import com.ysraelmorenopkg.storybook.ui.theme.ComposeBookTheme
 
 /**
  * Custom icons matching Storybook JS design.
@@ -22,7 +22,7 @@ import com.ysraelmorenopkg.storybook.ui.theme.StorybookTheme
 fun ChevronDownIcon(
     modifier: Modifier = Modifier,
     size: Dp = 16.dp,
-    color: Color = StorybookTheme.colors.textSecondary
+    color: Color = ComposeBookTheme.colors.textSecondary
 ) {
     Canvas(modifier = modifier.size(size)) {
         val strokeWidth = 2f
@@ -43,7 +43,7 @@ fun ChevronDownIcon(
 fun ChevronRightIcon(
     modifier: Modifier = Modifier,
     size: Dp = 16.dp,
-    color: Color = StorybookTheme.colors.textSecondary
+    color: Color = ComposeBookTheme.colors.textSecondary
 ) {
     Canvas(modifier = modifier.size(size)) {
         val strokeWidth = 2f
@@ -64,7 +64,7 @@ fun ChevronRightIcon(
 fun ChevronUpIcon(
     modifier: Modifier = Modifier,
     size: Dp = 16.dp,
-    color: Color = StorybookTheme.colors.textSecondary
+    color: Color = ComposeBookTheme.colors.textSecondary
 ) {
     Canvas(modifier = modifier.size(size)) {
         val strokeWidth = 2f
@@ -85,7 +85,7 @@ fun ChevronUpIcon(
 fun BookIcon(
     modifier: Modifier = Modifier,
     size: Dp = 16.dp,
-    color: Color = StorybookTheme.colors.accent
+    color: Color = ComposeBookTheme.colors.accent
 ) {
     Canvas(modifier = modifier.size(size)) {
         val strokeWidth = 1.5f
@@ -114,7 +114,7 @@ fun BookIcon(
 fun SettingsIcon(
     modifier: Modifier = Modifier,
     size: Dp = 16.dp,
-    color: Color = StorybookTheme.colors.textSecondary
+    color: Color = ComposeBookTheme.colors.textSecondary
 ) {
     Canvas(modifier = modifier.size(size)) {
         val strokeWidth = 1.5f

@@ -1,14 +1,14 @@
-# Storybook Kotlin - Modern UI Implementation
+# ComposeBook Kotlin - Modern UI Implementation
 
 ## Overview
 
-This document describes the modernization of the Storybook Kotlin UI, transforming it from a Material Design-based interface to a custom design system inspired by Storybook JS 7+.
+This document describes the modernization of the ComposeBook Kotlin UI, transforming it from a Material Design-based interface to a custom design system inspired by ComposeBook JS 7+.
 
 ## Motivation
 
 The original implementation used Material Theme components, which:
 - Looked generic and not distinctive
-- Didn't match the Storybook JS aesthetic developers are familiar with
+- Didn't match the ComposeBook JS aesthetic developers are familiar with
 - Lacked the professional developer tool appearance
 
 ## New Architecture
@@ -18,16 +18,16 @@ The original implementation used Material Theme components, which:
 ```
 storybook-ui/
 ├── theme/
-│   ├── StorybookColors.kt      # Custom color system
-│   ├── StorybookTypography.kt  # Typography definitions
-│   └── StorybookTheme.kt       # Theme provider
+│   ├── ComposeBookColors.kt      # Custom color system
+│   ├── ComposeBookTypography.kt  # Typography definitions
+│   └── ComposeBookTheme.kt       # Theme provider
 ├── components/
-│   ├── StorybookButton.kt      # Custom buttons
-│   ├── StorybookText.kt        # Text components
-│   ├── StorybookDivider.kt     # Dividers
-│   └── StorybookIcons.kt       # Custom icons
+│   ├── ComposeBookButton.kt      # Custom buttons
+│   ├── ComposeBookText.kt        # Text components
+│   ├── ComposeBookDivider.kt     # Dividers
+│   └── ComposeBookIcons.kt       # Custom icons
 └── app/
-    ├── ModernStorybookApp.kt   # Main application
+    ├── ModernComposeBookApp.kt   # Main application
     └── ControlsPanel.kt        # Controls panel
 ```
 
@@ -35,13 +35,13 @@ storybook-ui/
 
 ### Color System
 
-Inspired by Storybook JS 7+ with professional dark and light themes:
+Inspired by ComposeBook JS 7+ with professional dark and light themes:
 
 **Dark Theme (Default)**
 ```kotlin
 background = Color(0xFF1A1A1A)          // Deep dark background
 backgroundElevated = Color(0xFF262626)  // Elevated surfaces
-accent = Color(0xFF029CFD)              // Storybook blue
+accent = Color(0xFF029CFD)              // ComposeBook blue
 textPrimary = Color(0xFFE8E8E8)         // High contrast text
 textSecondary = Color(0xFFB3B3B3)       // Secondary text
 ```
@@ -69,19 +69,19 @@ code: 13sp, Monospace         // Code snippets
 
 ### Custom Components
 
-#### StorybookButton
+#### ComposeBookButton
 - Rounded corners (6dp)
 - Subtle backgrounds
 - Custom padding (12dp x 8dp)
 - Theme-aware colors
 
-#### StorybookIcons
+#### ComposeBookIcons
 - Custom SVG-style icons
 - Minimal, professional design
 - Icons: ChevronDown, ChevronRight, ChevronUp, Book, Settings
 - Canvas-based rendering
 
-#### StorybookText
+#### ComposeBookText
 - Type-safe text components
 - Automatic theme integration
 - Variants: Title, Body, Label
@@ -128,7 +128,7 @@ code: 13sp, Monospace         // Code snippets
 
 ### Before (Material Theme)
 ```kotlin
-StorybookApp(
+ComposeBookApp(
     registry = registry,
     theme = { MaterialTheme { it() } }
 )
@@ -136,7 +136,7 @@ StorybookApp(
 
 ### After (Modern UI)
 ```kotlin
-ModernStorybookApp(
+ModernComposeBookApp(
     registry = registry,
     darkTheme = true
 )
@@ -146,7 +146,7 @@ ModernStorybookApp(
 
 ### Visual Design
 - ✅ Professional dark theme by default
-- ✅ Custom color palette matching Storybook JS
+- ✅ Custom color palette matching ComposeBook JS
 - ✅ Cleaner typography optimized for code
 - ✅ Subtle rounded corners and borders
 - ✅ Better visual hierarchy
@@ -155,7 +155,7 @@ ModernStorybookApp(
 - ✅ Retractable panels for more canvas space
 - ✅ Better story organization with categories
 - ✅ Improved control rendering
-- ✅ Familiar layout for Storybook JS users
+- ✅ Familiar layout for ComposeBook JS users
 - ✅ More screen space for component preview
 
 ### Technical Benefits
@@ -165,7 +165,7 @@ ModernStorybookApp(
 - ✅ Custom components for full control
 - ✅ Easier to customize and extend
 
-## Comparison with Storybook JS
+## Comparison with ComposeBook JS
 
 ### Similarities
 - Dark theme by default
@@ -211,7 +211,7 @@ class MainActivity : ComponentActivity() {
         registerSampleStories(registry)
         
         setContent {
-            ModernStorybookApp(
+            ModernComposeBookApp(
                 registry = registry,
                 darkTheme = true
             )
@@ -223,14 +223,14 @@ class MainActivity : ComponentActivity() {
 ### Custom Theme Integration
 ```kotlin
 // Using custom colors
-val customColors = StorybookColors(
+val customColors = ComposeBookColors(
     background = Color(0xFF0D1117),
     // ... customize other colors
 )
 
 // Apply via theme
-StorybookTheme(darkTheme = true) {
-    // Your custom StorybookApp implementation
+ComposeBookTheme(darkTheme = true) {
+    // Your custom ComposeBookApp implementation
 }
 ```
 
@@ -282,7 +282,7 @@ StorybookTheme(darkTheme = true) {
 
 ## Conclusion
 
-The modern UI implementation provides a professional, familiar interface for Storybook Kotlin users while maintaining the MVP scope. The custom design system gives full control over the appearance and creates a distinctive identity separate from generic Material Design apps.
+The modern UI implementation provides a professional, familiar interface for ComposeBook Kotlin users while maintaining the MVP scope. The custom design system gives full control over the appearance and creates a distinctive identity separate from generic Material Design apps.
 
 The modular architecture (separate `storybook-ui` module) allows users to:
 1. Use the modern UI (recommended)
