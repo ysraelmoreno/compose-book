@@ -1,358 +1,658 @@
-# ComposeBook Kotlin
+# ComposeBook
 
-A Kotlin-native library for showcasing Design System components, inspired by Storybook JS.
+<div align="center">
 
-## Status: MVP (Minimum Viable Product)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.0+-purple?style=for-the-badge&logo=kotlin)
+![Jetpack Compose](https://img.shields.io/badge/Compose-1.5+-blue?style=for-the-badge&logo=jetpackcompose)
+![Android](https://img.shields.io/badge/Android-8.0+-green?style=for-the-badge&logo=android)
+![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
 
-This is an MVP implementation focused on **validating the core conceptual model**. The goal is not visual polish, but proving that:
-- The core is solid and UI-independent
-- The Story API is usable day-to-day
-- Components can be rendered and edited predictably
+**A Kotlin-native library for showcasing Design System components and exploring UI variations**
 
-## What This Is
+[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Architecture](#-architecture) • [Contributing](#-contributing)
 
-A library for:
-- **Design System component showcasing**
-- **UI state exploration** - See all variations of a component
-- **Internal product team usage** - Shared component library
+</div>
 
-## What This Is NOT
+---
 
-- ❌ A visual regression testing tool
-- ❌ A Kotlin port of Storybook JS
-- ❌ A navigation or routing framework
-- ❌ A production-ready library (yet - this is MVP)
+## 📖 About
 
-## UI Options
+**ComposeBook** is an open-source, Kotlin-native library designed specifically for building component showcases and exploring UI variations in Jetpack Compose applications. Inspired by Storybook JS but built from the ground up for Kotlin, ComposeBook provides a clean, type-safe API for documenting and testing your Design System components in isolation.
 
-ComposeBook provides two UI implementations:
+Unlike ports or adaptations, ComposeBook embraces Kotlin's strengths: immutability, explicit APIs, and a UI-independent core that works seamlessly with Jetpack Compose.
 
-### 1. Modern Custom Design System (`composebook-ui` module)
+### 🎯 What Problem Does It Solve?
+
+When building a Design System or component library, you need:
+- **Isolated component development** - See components without app complexity
+- **State exploration** - Test all variations (loading, error, different props)
+- **Documentation** - Visual documentation that stays in sync with code
+- **Team collaboration** - Shared component library for designers and developers
+- **Quality assurance** - Catch visual regressions early
+
+ComposeBook solves these by providing a structured way to define, organize, and showcase your components.
+
+### ✨ Why ComposeBook?
+
+- **🎨 Two UI Options**: Modern custom design system OR classic Material Theme
+- **🏗️ UI-Independent Core**: Works without Compose - future-proof architecture
+- **📝 Explicit Story API**: No reflection magic - everything is clear and type-safe
+- **🎭 Manual Registration**: Full control over what you showcase
+- **🔒 Immutable by Default**: State changes create new instances - predictable behavior
+- **📦 Minimal Public API**: Stable, focused API designed for open-source usage
+- **🚀 Kotlin-First**: Built specifically for Kotlin - not a JavaScript port
+
+---
+
+## 🎨 Features
+
+### Core Features
+
+- **Story Definition DSL**: Clean, readable syntax for defining component variations
+- **Type-Safe Prop Controls**: Edit component props in real-time with type safety
+- **Hierarchical Organization**: Group stories by category for easy navigation
+- **Runtime State Management**: Modify props and see changes instantly
+- **Environment Context**: Test components in different theme/locale configurations
+- **Collapsible Panels**: Maximize canvas space with retractable controls
+
+### Control Types
+
+- **TextControl**: Edit string properties
+- **BooleanControl**: Toggle boolean properties
+- **EnumControl**: Select from predefined values
+- _More controls in future releases_
+
+### Two UI Implementations
+
+#### Modern UI (`composebook-ui`)
 - Custom design system inspired by Storybook JS 7+
 - Dark/Light theme support
 - Professional developer tool aesthetics
-- No Material Design dependencies
+- Vertical 3-panel layout (Stories | Canvas | Controls)
 
-### 2. Classic Material Theme (`composebook-compose` module)
-- Traditional Material Design 3 look
-- Familiar Android UI patterns
-- Lighter weight option
+#### Classic UI (`composebook-compose`)
+- Material Design 3 theme
+- Familiar Android patterns
+- Lightweight alternative
 
-## Architecture
+---
 
-### Modules
+## 🚀 Quick Start
 
-```
-composebook-kotlin/
-├── composebook-core/       # Pure Kotlin, UI-independent core
-├── composebook-compose/    # Jetpack Compose adapter
-├── composebook-ui/         # Modern UI with custom design system
-└── composebook-samples/    # Example stories
-```
+### Prerequisites
 
-### Core Principles
+- **Kotlin**: 2.0 or higher
+- **Gradle**: 8.0 or higher
+- **Android**: minSdk 25 (Android 8.0) or higher
+- **Jetpack Compose**: 1.5 or higher
 
-1. **Core is UI-independent** - No Compose, no Android, no UI frameworks
-2. **Stories are data, not screens** - Describes what to render, not how to navigate
-3. **No reflection magic** - Everything is explicit
-4. **Immutability by default** - All state changes create new instances
-5. **Minimal public API** - Open-source requires stability
+### Installation
 
-## Quick Start
-
-### 1. Add Dependencies
+Add ComposeBook to your project:
 
 ```kotlin
+// settings.gradle.kts
+include(":composebook-core")
+include(":composebook-compose")
+include(":composebook-ui")      // Optional: Modern UI
+include(":composebook-samples")  // Optional: Example stories
+```
+
+```kotlin
+// app/build.gradle.kts
 dependencies {
     implementation(project(":composebook-core"))
     implementation(project(":composebook-compose"))
+    
+    // Optional: Modern UI with custom design system
+    implementation(project(":composebook-ui"))
 }
 ```
 
-### 2. Create Props
+### Your First Story
+
+#### 1. Define Props
 
 ```kotlin
 data class ButtonProps(
     val text: String,
-    val enabled: Boolean
+    val enabled: Boolean,
+    val variant: ButtonVariant
 )
+
+enum class ButtonVariant { Primary, Secondary, Destructive }
 ```
 
-### 3. Create a Story
+#### 2. Create the Story
 
 ```kotlin
-import com.ysraelmorenopkg.storybook.compose.adapter.composeStory
-import com.ysraelmorenopkg.storybook.core.control.TextControl
-import com.ysraelmorenopkg.storybook.core.control.BooleanControl
-
-val ButtonStory = composeStory(
-    id = "button.primary",
+val PrimaryButtonStory = story(
+    id = StoryId("button.primary"),
     name = "Button / Primary",
-    defaultProps = ButtonProps("Click Me", true)
+    defaultProps = ButtonProps(
+        text = "Click Me",
+        enabled = true,
+        variant = ButtonVariant.Primary
+    )
 ) {
+    // Define editable controls
     control(
         key = "text",
-        control = TextControl("Text"),
+        control = TextControl(label = "Text"),
         getter = { it.text },
         setter = { props, value -> props.copy(text = value) }
     )
     
     control(
         key = "enabled",
-        control = BooleanControl("Enabled"),
+        control = BooleanControl(label = "Enabled"),
         getter = { it.enabled },
         setter = { props, value -> props.copy(enabled = value) }
     )
     
+    control(
+        key = "variant",
+        control = EnumControl(
+            label = "Variant",
+            values = ButtonVariant.entries.toSet()
+        ),
+        getter = { it.variant },
+        setter = { props, value -> props.copy(variant = value) }
+    )
+    
+    // Define how to render the component
     render { props, _ ->
         Button(
-            onClick = { },
-            enabled = props.enabled
-        ) {
-            Text(props.text)
-        }
+            text = props.text,
+            enabled = props.enabled,
+            variant = props.variant
+        )
     }
 }
 ```
 
-### 4. Register Stories
-
-```kotlin
-val registry = InMemoryStoryRegistry()
-registry.register(ButtonStory)
-```
-
-### 5. Launch ComposeBook
+#### 3. Register and Launch
 
 ```kotlin
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
+        // Create registry and register stories
         val registry = InMemoryStoryRegistry()
-        registerSampleStories(registry)
+        registry.register(PrimaryButtonStory)
         
         setContent {
-            // Modern UI with custom design system (Recommended)
+            // Option 1: Modern UI
             ModernComposeBookApp(
                 registry = registry,
                 darkTheme = true
             )
             
-            // OR: Classic UI with Material Theme
-            ComposeBookApp(
-                registry = registry,
-                theme = { content ->
-                    MyAppTheme {
-                        content()
-                    }
-                }
-            )
+            // Option 2: Classic Material UI
+            // ComposeBookApp(registry = registry)
         }
     }
 }
 ```
 
-## UI Options
+That's it! 🎉 Run your app and explore your component stories.
 
-### Modern UI (Recommended)
+---
 
-Professional interface inspired by Storybook JS 7+ with:
-- Custom design system (no Material Theme dependency)
-- Dark theme by default
-- Retractable sidebar and controls panel
-- Professional color palette and typography
-- Custom icons and components
+## 📚 Documentation
+
+### Core Concepts
+
+#### Stories
+A **Story** represents a single variation of a component. It defines:
+- **Props**: The component's configuration
+- **Controls**: How to edit props at runtime
+- **Render**: How to display the component
 
 ```kotlin
-import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
+val story = story(id, name, defaultProps) {
+    control(...)
+    render { props, context -> /* Composable */ }
+}
+```
 
-ModernComposeBookApp(
-    registry = registry,
-    darkTheme = true // or false for light theme
+#### Registry
+The **Registry** stores and organizes all your stories:
+
+```kotlin
+val registry = InMemoryStoryRegistry()
+registry.register(ButtonStory)
+registry.register(CardStory)
+registry.register(BadgeStory)
+
+// Retrieve stories
+val allStories = registry.getAllStories()
+val buttonStory = registry.getStory(StoryId("button.primary"))
+```
+
+#### Controls & Bindings
+**Controls** let you edit props in the UI:
+
+```kotlin
+// Text control
+control(
+    key = "label",
+    control = TextControl("Label"),
+    getter = { it.label },
+    setter = { props, value -> props.copy(label = value) }
+)
+
+// Boolean control
+control(
+    key = "visible",
+    control = BooleanControl("Visible"),
+    getter = { it.visible },
+    setter = { props, value -> props.copy(visible = value) }
+)
+
+// Enum control
+control(
+    key = "size",
+    control = EnumControl("Size", Size.entries.toSet()),
+    getter = { it.size },
+    setter = { props, value -> props.copy(size = value) }
 )
 ```
 
-**Features:**
-- 🎨 Custom color system (#1A1A1A background, #029CFD accent)
-- 📝 Optimized typography for technical content
-- 📚 Collapsible story categories
-- ⚙️ Modern control renderers
-- 🔄 Smooth animations
-
-See [Modern UI Documentation](docs/modern_ui_implementation.md) for details.
-
-### Classic UI
-
-Simple Material Theme-based interface:
+#### Story Environment
+**Environment** provides context like theme and locale:
 
 ```kotlin
-import com.ysraelmorenopkg.storybook.compose.app.ComposeBookApp
+data class StoryEnvironment(
+    val theme: ThemeMode,
+    val locale: Locale,
+    val device: DeviceProfile
+)
 
-ComposeBookApp(
-    registry = registry,
-    theme = { content ->
-        MyAppTheme { content() }
+// Access in render
+render { props, context ->
+    val isDarkMode = context.environment.theme == ThemeMode.DARK
+    // Render based on environment
+}
+```
+
+### Advanced Usage
+
+#### Organizing Stories by Category
+
+Use naming convention `"Category / Story Name"`:
+
+```kotlin
+story(id = "button.primary", name = "Button / Primary", ...)
+story(id = "button.secondary", name = "Button / Secondary", ...)
+story(id = "card.default", name = "Card / Default", ...)
+story(id = "card.image", name = "Card / With Image", ...)
+```
+
+Stories are automatically grouped in the UI.
+
+#### Custom Story Registration
+
+Create a dedicated function for registering stories:
+
+```kotlin
+fun registerButtonStories(registry: StoryRegistry) {
+    registry.register(PrimaryButtonStory)
+    registry.register(SecondaryButtonStory)
+    registry.register(DestructiveButtonStory)
+}
+
+fun registerCardStories(registry: StoryRegistry) {
+    registry.register(DefaultCardStory)
+    registry.register(ImageCardStory)
+}
+
+// In your app
+val registry = InMemoryStoryRegistry()
+registerButtonStories(registry)
+registerCardStories(registry)
+```
+
+---
+
+## 🏗️ Architecture
+
+### Module Structure
+
+```
+ComposeBookCompose/
+├── composebook-core/        # Pure Kotlin - UI-independent
+│   ├── Story API
+│   ├── StoryRegistry
+│   ├── PropControl & PropBinding
+│   ├── StoryEnvironment
+│   └── StoryRuntimeState
+│
+├── composebook-compose/     # Jetpack Compose adapter
+│   ├── ComposeStory wrapper
+│   ├── StoryCanvas renderer
+│   └── Classic Material UI
+│
+├── composebook-ui/          # Modern custom design system
+│   ├── ComposeBookTheme (custom)
+│   ├── ModernComposeBookApp
+│   ├── Custom components
+│   └── Control renderers
+│
+└── composebook-samples/     # Example stories
+    ├── Button stories
+    ├── Card stories
+    └── Badge stories
+```
+
+### Architectural Principles
+
+#### 1. Core is UI-Independent
+The `composebook-core` module has **zero UI dependencies**:
+
+```kotlin
+// ✅ ALLOWED in core
+interface Story<Props : Any> {
+    fun render(props: Props, context: StoryContext)
+}
+
+// ❌ NOT ALLOWED in core
+import androidx.compose.runtime.Composable
+import android.view.View
+```
+
+**Why?** Future-proof for multiplatform support (iOS, Desktop, Web).
+
+#### 2. Stories are Data, Not Screens
+Stories describe **what** to render, not navigation:
+
+```kotlin
+// ✅ GOOD - Story renders content
+val story = story(...) {
+    render { props, _ ->
+        Button(text = props.text)
     }
-)
+}
+
+// ❌ BAD - Story handling navigation
+val story = story(...) {
+    render { props, _ ->
+        navigateTo(ButtonScreen)
+    }
+}
 ```
 
-## Customization
+#### 3. No Reflection Magic
+Everything is explicit - no automatic discovery:
+
+```kotlin
+// ❌ BAD - Reflection-based
+@Story
+class ButtonStory { ... }
+
+// ✅ GOOD - Explicit registration
+val story = story(...) { ... }
+registry.register(story)
+```
+
+**Why?** Works in Kotlin/Native, smaller binary size, predictable behavior.
+
+#### 4. Immutability by Default
+State changes create new instances:
+
+```kotlin
+// ❌ BAD - Mutable props
+class ButtonProps(var text: String, var enabled: Boolean)
+
+// ✅ GOOD - Immutable props
+data class ButtonProps(val text: String, val enabled: Boolean)
+```
+
+#### 5. Minimal Public API
+Keep public APIs small and stable:
+
+```kotlin
+// Public API (stable)
+- Story
+- StoryId
+- StoryBuilder
+- PropControl
+- PropBinding
+- StoryRegistry
+- StoryEnvironment
+
+// Everything else is internal or private
+```
+
+---
+
+## 🎨 Customization
 
 ### Custom Theme
 
-The ComposeBook UI can be themed to match your app's design system:
+Create your own theme for `ModernComposeBookApp`:
 
 ```kotlin
-// Use your app's theme for the ComposeBook UI
-ComposeBookApp(
-    registry = registry,
-    theme = { content ->
-        MyDesignSystemTheme(
-            darkTheme = false,
-            dynamicColor = true
-        ) {
-            content()
-        }
-    }
+// Define custom colors
+val MyCustomColors = ComposeBookColors(
+    background = Color(0xFF1E1E1E),
+    accent = Color(0xFFFF6B6B),
+    // ... other colors
 )
+
+// Use in app
+ComposeBookTheme(darkTheme = true) {
+    // Override colors if needed
+    // Your custom UI here
+}
 ```
 
-**What gets themed:**
-- Stories header background and text colors
-- Controls panel background and text colors
-- Dropdown menus, text fields, switches
-- Dividers and surface colors
-- Typography styles
+### Custom Controls
 
-**Note:** The canvas area renders your components with their own theme (via StoryEnvironment), so your components maintain their original appearance while the ComposeBook UI uses your theme.
+Create custom control types:
 
-## MVP Features
+```kotlin
+// Define custom control
+data class NumberControl(
+    override val label: String,
+    val min: Int,
+    val max: Int
+) : PropControl<Int>
 
-### ✅ Included
-
-- Pure Kotlin core module
-- Jetpack Compose adapter
-- Manual story registration
-- Basic controls (Text, Boolean, Enum)
-- Theme switching (Light/Dark)
-- 3-panel UI (Stories, Canvas, Controls)
-- Sample implementations (Button, Card)
-
-### ❌ Not Included (Post-MVP)
-
-- State persistence
-- Visual snapshots
-- Code generation
-- Gradle plugin
-- Auto-discovery of stories
-- Multiplatform support
-- Advanced controls (Color, Number, Date)
-- Deep linking
-- UI polish
-
-## Success Criteria
-
-The MVP is successful if:
-
-1. ✅ An external dev can create a story without reading internal code
-2. ✅ Props can be modified at runtime
-3. ✅ The same component supports multiple variations
-4. ✅ The core has zero Compose/Android dependencies
-5. ✅ Zero reflection usage
-
-## Project Structure
-
-### composebook-core
-
-Pure Kotlin module with clean architecture:
-
-```
-composebook-core/
-├── api/          # Story, StoryContext
-├── model/        # StoryId
-├── control/      # PropControl, PropBinding
-├── environment/  # StoryEnvironment, ThemeMode
-├── registry/     # StoryRegistry, InMemoryStoryRegistry
-└── runtime/      # StoryRuntimeState
+// Create renderer
+@Composable
+fun NumberControlRenderer(
+    control: NumberControl,
+    value: Int,
+    onValueChange: (Int) -> Unit
+) {
+    Slider(
+        value = value.toFloat(),
+        onValueChange = { onValueChange(it.toInt()) },
+        valueRange = control.min.toFloat()..control.max.toFloat()
+    )
+}
 ```
 
-**Key constraint**: No UI framework dependencies.
+---
 
-### composebook-compose
+## 🧪 Examples
 
-Jetpack Compose implementation:
+Check the `composebook-samples` module for complete examples:
 
-```
-composebook-compose/
-├── adapter/      # ComposeStory, ComposeStoryBuilder
-├── canvas/       # StoryCanvas
-├── controls/     # Control renderers (TextField, Switch, etc.)
-└── app/          # Classic ComposeBookApp
-```
+### Button Stories
+- Primary, Secondary, Destructive variants
+- Enabled/disabled states
+- Custom text content
 
-### composebook-ui
+### Card Stories
+- Default card layout
+- Card with image
+- Card with actions
 
-Modern UI with custom design system:
+### Badge Stories
+- Different badge styles
+- Number badges
+- Status badges
 
-```
-composebook-ui/
-├── theme/        # ComposeBookColors, ComposeBookTypography, ComposeBookTheme
-├── components/   # Custom buttons, text, icons, dividers
-└── app/          # ModernComposeBookApp, ControlsPanel
-```
-
-## Examples
-
-See `composebook-samples/` for complete examples:
-- Button (Primary, Disabled)
-- Card (Default, With Image)
-
-## Documentation
-
-- [Architecture & Contracts](docs/storybook_kotlin_arquitetura_e_contratos.md)
-- [MVP Specification](docs/storybook_kotlin_especificacao_do_mvp.md)
-- [Technical Backlog](docs/storybook_kotlin_backlog_tecnico_do_mvp.md)
-- [Modern UI Implementation](docs/modern_ui_implementation.md)
-- [Visual Comparison](docs/visual_comparison.md)
-- [Customization Guide](docs/customization_guide.md)
-
-## Building
+### Running Examples
 
 ```bash
-# Build core (pure Kotlin)
-./gradlew :composebook-core:build
+# Clone the repository
+git clone https://github.com/yourusername/composebook.git
 
-# Build Compose adapter
-./gradlew :composebook-compose:build
+# Open in Android Studio
+open composebook/
 
-# Build samples
-./gradlew :composebook-samples:build
-
-# Build and run app
-./gradlew :app:assembleDebug
+# Run the app module to see examples
+./gradlew :app:installDebug
 ```
 
-## Requirements
+---
 
-- JDK 17+
-- Android SDK 33+
-- Kotlin 2.0+
+## 🤝 Contributing
 
-## License
+We welcome contributions! ComposeBook is an MVP focused on validating the core concept. Here's how you can help:
 
-TBD (Open-source license to be determined post-MVP)
+### Areas for Contribution
 
-## Contributing
+- 🐛 **Bug Fixes**: Found a bug? Submit a PR with a fix
+- 📚 **Documentation**: Improve docs, add examples, fix typos
+- ✨ **New Control Types**: Add NumberControl, ColorControl, DateControl
+- 🎨 **UI Improvements**: Enhance the Modern UI design
+- 🧪 **Tests**: Add unit tests and UI tests
+- 🌍 **Localization**: Help translate the UI
 
-This is currently an MVP for internal validation. External contributions will be welcome once the API is stable and the repository is public.
+### Development Setup
 
-## Next Steps
+1. **Fork the repository**
+2. **Clone your fork**:
+   ```bash
+   git clone https://github.com/yourusername/composebook.git
+   cd composebook
+   ```
+3. **Create a feature branch**:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+4. **Make your changes** and test thoroughly
+5. **Commit with clear messages**:
+   ```bash
+   git commit -m "feat: add NumberControl for numeric props"
+   ```
+6. **Push to your fork**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+7. **Open a Pull Request** with a clear description
 
-After MVP validation:
-1. Freeze core API
-2. Mark experimental APIs
-3. Collect feedback
-4. Plan roadmap based on real usage
+### Code Style
 
-**Without validation, there is no roadmap.**
+- Follow [Kotlin coding conventions](https://kotlinlang.org/docs/coding-conventions.html)
+- Use meaningful variable and function names
+- Add KDoc comments for public APIs
+- Keep functions small and focused
+- Write tests for new features
+
+### Commit Convention
+
+We follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+- `feat:` New feature
+- `fix:` Bug fix
+- `docs:` Documentation changes
+- `refactor:` Code refactoring
+- `test:` Adding tests
+- `chore:` Maintenance tasks
+
+---
+
+## 🗺️ Roadmap
+
+### MVP (Current)
+- ✅ Core Story API
+- ✅ Basic controls (Text, Boolean, Enum)
+- ✅ Manual registration
+- ✅ Two UI options (Modern + Classic)
+- ✅ Hierarchical organization
+
+### Phase 2 (Planned)
+- ⏳ More control types (Number, Color, Date)
+- ⏳ State persistence
+- ⏳ Visual snapshot testing
+- ⏳ Gradle plugin for code generation
+- ⏳ Deep linking to stories
+
+### Phase 3 (Future)
+- 🔮 Multiplatform support (iOS, Desktop, Web)
+- 🔮 Auto-discovery of stories
+- 🔮 Interactive documentation generation
+- 🔮 Visual regression testing integration
+
+**Note**: MVP is focused on validation. Features are added based on real user feedback.
+
+---
+
+## 📄 License
+
+```
+MIT License
+
+Copyright (c) 2024 ComposeBook Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## 🙏 Acknowledgments
+
+- **Storybook JS**: Inspiration for the concept and design
+- **Jetpack Compose Team**: Amazing UI toolkit
+- **Kotlin Community**: For the incredible language and ecosystem
+
+---
+
+## 📞 Support & Community
+
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/composebook/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/composebook/discussions)
+- 📧 **Email**: composebook@example.com
+- 🐦 **Twitter**: [@composebook](https://twitter.com/composebook)
+
+---
+
+## 🌟 Show Your Support
+
+If ComposeBook helps your project, consider:
+- ⭐ **Star this repository**
+- 🐦 **Tweet about it**
+- 📝 **Write a blog post**
+- 💬 **Share with your team**
+
+---
+
+<div align="center">
+
+**Built with ❤️ for the Kotlin & Compose community**
+
+[⬆ Back to Top](#composebook)
+
+</div>
