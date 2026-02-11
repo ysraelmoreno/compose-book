@@ -22,6 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "ComposeBookCompose"
 include(":app")
 include(":composebook-core")
-include(":composebook-compose")
 include(":composebook-ui")
 include(":composebook-samples")

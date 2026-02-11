@@ -12,9 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ysraelmorenopkg.storybook.compose.adapter.composeStory
-import com.ysraelmorenopkg.storybook.core.control.BooleanControl
-import com.ysraelmorenopkg.storybook.core.control.TextControl
+import com.ysraelmorenopkg.composebook.ui.adapter.composeStory
+import com.ysraelmorenopkg.composebook.core.control.BooleanControl
+import com.ysraelmorenopkg.composebook.core.control.TextControl
 
 /**
  * Story for a default card without image.

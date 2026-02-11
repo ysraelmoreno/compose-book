@@ -25,10 +25,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.ysraelmorenopkg.storybook.compose.adapter.composeStory
-import com.ysraelmorenopkg.storybook.core.control.BooleanControl
-import com.ysraelmorenopkg.storybook.core.control.EnumControl
-import com.ysraelmorenopkg.storybook.core.control.TextControl
+import com.ysraelmorenopkg.composebook.ui.adapter.composeStory
+import com.ysraelmorenopkg.composebook.core.control.BooleanControl
+import com.ysraelmorenopkg.composebook.core.control.EnumControl
+import com.ysraelmorenopkg.composebook.core.control.TextControl
 
 // Sample options for stories
 private val defaultOptions = listOf(

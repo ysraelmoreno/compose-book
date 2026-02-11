@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.ysraelmorenopkg.storybook.core.registry.InMemoryStoryRegistry
+import com.ysraelmorenopkg.composebook.core.registry.InMemoryStoryRegistry
 import com.ysraelmorenopkg.storybook.samples.registerSampleStories
-import com.ysraelmorenopkg.storybook.ui.app.ComposeBookApp
+import com.ysraelmorenopkg.composebook.ui.app.ComposeBookApp
 
 /**
  * Main activity that launches the ComposeBook application.
