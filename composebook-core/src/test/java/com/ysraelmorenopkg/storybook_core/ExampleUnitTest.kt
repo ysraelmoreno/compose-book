@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.storybook_core
+package com.ysraelmorenopkg.composebook_core
 
 import org.junit.Test
 

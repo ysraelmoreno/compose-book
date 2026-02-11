@@ -35,6 +35,8 @@ This module provides a modern, professional interface inspired by ComposeBook JS
 
 ## Usage
 
+### Using ComposeBookApp
+
 ```kotlin
 import com.ysraelmorenopkg.storybook.ui.app.ComposeBookApp
 
@@ -43,6 +45,41 @@ ComposeBookApp(
     darkTheme = true
 )
 ```
+
+### Creating Stories with Modern UI Builder
+
+The `composebook-ui` module provides a simplified `story` function:
+
+```kotlin
+import com.ysraelmorenopkg.composebook.ui.builder.story
+import com.ysraelmorenopkg.composebook.core.control.*
+
+val MyButtonStory = story(
+    id = "button.primary",
+    name = "Button / Primary",
+    defaultProps = ButtonProps(text = "Click Me", enabled = true)
+) {
+    control(
+        key = "text",
+        control = TextControl("Text", "Button label"),
+        getter = { it.text },
+        setter = { props, value -> props.copy(text = value) }
+    )
+    
+    control(
+        key = "enabled",
+        control = BooleanControl("Enabled", "Enable or disable button"),
+        getter = { it.enabled },
+        setter = { props, value -> props.copy(enabled = value) }
+    )
+    
+    render { props, _ ->
+        Button(text = props.text, enabled = props.enabled)
+    }
+}
+```
+
+**Note**: You can also use the original `composeStory` from `composebook-compose` module if preferred.
 
 ## Color Palette
 

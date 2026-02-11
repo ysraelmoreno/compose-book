@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.composebook.compose.controls
+package com.ysraelmorenopkg.composebook.ui.controls
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

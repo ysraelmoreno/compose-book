@@ -18,10 +18,14 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-            
+
             groupId = "com.ysraelmorenopkg.composebook"
             artifactId = "composebook-core"
             version = "0.1.0-SNAPSHOT"  // Must match the module version
         }
+    }
+    
+    repositories {
+        mavenLocal()
     }
 }

@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.composebook.compose.canvas
+package com.ysraelmorenopkg.composebook.ui.canvas
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,8 +8,8 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.ysraelmorenopkg.composebook.compose.adapter.ComposeStory
-import com.ysraelmorenopkg.composebook.compose.adapter.DefaultStoryContext
+import com.ysraelmorenopkg.composebook.ui.adapter.ComposeStory
+import com.ysraelmorenopkg.composebook.ui.adapter.DefaultStoryContext
 import com.ysraelmorenopkg.composebook.core.environment.ThemeMode
 import com.ysraelmorenopkg.composebook.core.runtime.StoryRuntimeState
 

@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.storybook.compose.controls
+package com.ysraelmorenopkg.composebook.compose.controls
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,8 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ysraelmorenopkg.storybook.core.api.Story
-import com.ysraelmorenopkg.storybook.core.control.PropBinding
+import com.ysraelmorenopkg.composebook.core.api.Story
+import com.ysraelmorenopkg.composebook.core.control.PropBinding
 
 /**
  * Panel displaying all controls for a story.
