@@ -4,9 +4,6 @@ import com.ysraelmorenopkg.composebook.ui.adapter.ComposeStory
 import com.ysraelmorenopkg.composebook.ui.builder.StoryBuilder
 import com.ysraelmorenopkg.composebook.core.model.StoryId
 
-// Re-export DocumentationBuilder for public API
-typealias DocumentationBuilder = com.ysraelmorenopkg.composebook.ui.builder.StoryDocumentationBuilder
-
 /**
  * Creates a Compose story using a DSL.
  * 
