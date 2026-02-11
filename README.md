@@ -24,6 +24,7 @@ Unlike ports or adaptations, ComposeBook embraces Kotlin's strengths: immutabili
 ### 🎯 What Problem Does It Solve?
 
 When building a Design System or component library, you need:
+
 - **Isolated component development** - See components without app complexity
 - **State exploration** - Test all variations (loading, error, different props)
 - **Documentation** - Visual documentation that stays in sync with code
@@ -34,7 +35,7 @@ ComposeBook solves these by providing a structured way to define, organize, and 
 
 ### ✨ Why ComposeBook?
 
-- **🎨 Two UI Options**: Modern custom design system OR classic Material Theme
+- **🎨 Modern UI**: Custom design system inspired by Storybook JS 7+
 - **🏗️ UI-Independent Core**: Works without Compose - future-proof architecture
 - **📝 Explicit Story API**: No reflection magic - everything is clear and type-safe
 - **🎭 Manual Registration**: Full control over what you showcase
@@ -62,18 +63,15 @@ ComposeBook solves these by providing a structured way to define, organize, and 
 - **EnumControl**: Select from predefined values
 - _More controls in future releases_
 
-### Two UI Implementations
+### UI
 
 #### Modern UI (`composebook-ui`)
+
 - Custom design system inspired by Storybook JS 7+
 - Dark/Light theme support
 - Professional developer tool aesthetics
 - Vertical 3-panel layout (Stories | Canvas | Controls)
-
-#### Classic UI (`composebook-compose`)
-- Material Design 3 theme
-- Familiar Android patterns
-- Lightweight alternative
+- Complete story management and controls rendering
 
 ---
 
@@ -93,8 +91,7 @@ Add ComposeBook to your project:
 ```kotlin
 // settings.gradle.kts
 include(":composebook-core")
-include(":composebook-compose")
-include(":composebook-ui")      // Optional: Modern UI
+include(":composebook-ui")
 include(":composebook-samples")  // Optional: Example stories
 ```
 
@@ -102,9 +99,6 @@ include(":composebook-samples")  // Optional: Example stories
 // app/build.gradle.kts
 dependencies {
     implementation(project(":composebook-core"))
-    implementation(project(":composebook-compose"))
-    
-    // Optional: Modern UI with custom design system
     implementation(project(":composebook-ui"))
 }
 ```
@@ -145,14 +139,14 @@ val PrimaryButtonStory = story(
         getter = { it.text },
         setter = { props, value -> props.copy(text = value) }
     )
-    
+
     control(
         key = "enabled",
         control = BooleanControl(label = "Enabled", description = "Enable button"),
         getter = { it.enabled },
         setter = { props, value -> props.copy(enabled = value) }
     )
-    
+
     control(
         key = "variant",
         control = EnumControl(
@@ -163,7 +157,7 @@ val PrimaryButtonStory = story(
         getter = { it.variant },
         setter = { props, value -> props.copy(variant = value) }
     )
-    
+
     // Define how to render the component
     render { props, _ ->
         Button(
@@ -181,22 +175,17 @@ val PrimaryButtonStory = story(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         // Create registry and register stories
         val registry = InMemoryStoryRegistry()
         registry.register(PrimaryButtonStory)
-        
+
         setContent {
-            // Option 1: Modern UI (recommended)
+            // Launch ComposeBook with modern UI
             ComposeBookApp(
                 registry = registry,
                 darkTheme = true
             )
-            
-            // Option 2: Classic Material UI
-            // MaterialTheme {
-            //     StorybookApp(registry = registry)
-            // }
         }
     }
 }
@@ -211,7 +200,9 @@ That's it! 🎉 Run your app and explore your component stories.
 ### Core Concepts
 
 #### Stories
+
 A **Story** represents a single variation of a component. It defines:
+
 - **Props**: The component's configuration
 - **Controls**: How to edit props at runtime
 - **Render**: How to display the component
@@ -224,6 +215,7 @@ val story = story(id, name, defaultProps) {
 ```
 
 #### Registry
+
 The **Registry** stores and organizes all your stories:
 
 ```kotlin
@@ -238,6 +230,7 @@ val buttonStory = registry.getStory(StoryId("button.primary"))
 ```
 
 #### Controls & Bindings
+
 **Controls** let you edit props in the UI:
 
 ```kotlin
@@ -267,6 +260,7 @@ control(
 ```
 
 #### Story Environment
+
 **Environment** provides context like theme and locale:
 
 ```kotlin
@@ -327,7 +321,7 @@ registerCardStories(registry)
 ### Module Structure
 
 ```
-ComposeBookCompose/
+ComposeBook/
 ├── composebook-core/        # Pure Kotlin - UI-independent
 │   ├── Story API
 │   ├── StoryRegistry
@@ -335,14 +329,11 @@ ComposeBookCompose/
 │   ├── StoryEnvironment
 │   └── StoryRuntimeState
 │
-├── composebook-compose/     # Jetpack Compose adapter
-│   ├── ComposeStory wrapper
-│   ├── StoryCanvas renderer
-│   └── Classic Material UI
-│
-├── composebook-ui/          # Modern custom design system
+├── composebook-ui/          # Modern Compose UI with custom design system
 │   ├── ComposeBookTheme (custom)
-│   ├── ModernComposeBookApp
+│   ├── ComposeBookApp
+│   ├── Story builder & adapters
+│   ├── Canvas renderer
 │   ├── Custom components
 │   └── Control renderers
 │
@@ -355,6 +346,7 @@ ComposeBookCompose/
 ### Architectural Principles
 
 #### 1. Core is UI-Independent
+
 The `composebook-core` module has **zero UI dependencies**:
 
 ```kotlin
@@ -371,6 +363,7 @@ import android.view.View
 **Why?** Future-proof for multiplatform support (iOS, Desktop, Web).
 
 #### 2. Stories are Data, Not Screens
+
 Stories describe **what** to render, not navigation:
 
 ```kotlin
@@ -390,6 +383,7 @@ val story = story(...) {
 ```
 
 #### 3. No Reflection Magic
+
 Everything is explicit - no automatic discovery:
 
 ```kotlin
@@ -405,6 +399,7 @@ registry.register(story)
 **Why?** Works in Kotlin/Native, smaller binary size, predictable behavior.
 
 #### 4. Immutability by Default
+
 State changes create new instances:
 
 ```kotlin
@@ -416,6 +411,7 @@ data class ButtonProps(val text: String, val enabled: Boolean)
 ```
 
 #### 5. Minimal Public API
+
 Keep public APIs small and stable:
 
 ```kotlin
@@ -437,7 +433,7 @@ Keep public APIs small and stable:
 
 ### Custom Theme
 
-Create your own theme for `ModernComposeBookApp`:
+Customize the ComposeBook UI theme:
 
 ```kotlin
 // Define custom colors
@@ -488,16 +484,19 @@ fun NumberControlRenderer(
 Check the `composebook-samples` module for complete examples:
 
 ### Button Stories
+
 - Primary, Secondary, Destructive variants
 - Enabled/disabled states
 - Custom text content
 
 ### Card Stories
+
 - Default card layout
 - Card with image
 - Card with actions
 
 ### Badge Stories
+
 - Different badge styles
 - Number badges
 - Status badges
@@ -592,13 +591,16 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 ## 🗺️ Roadmap
 
 ### MVP (Current)
+
 - ✅ Core Story API
 - ✅ Basic controls (Text, Boolean, Enum)
 - ✅ Manual registration
-- ✅ Two UI options (Modern + Classic)
+- ✅ Modern UI with custom design system
 - ✅ Hierarchical organization
+- ✅ Dark/Light theme support
 
 ### Phase 2 (Planned)
+
 - ⏳ More control types (Number, Color, Date)
 - ⏳ State persistence
 - ⏳ Visual snapshot testing
@@ -606,6 +608,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 - ⏳ Deep linking to stories
 
 ### Phase 3 (Future)
+
 - 🔮 Multiplatform support (iOS, Desktop, Web)
 - 🔮 Auto-discovery of stories
 - 🔮 Interactive documentation generation
@@ -663,6 +666,7 @@ SOFTWARE.
 ## 🌟 Show Your Support
 
 If ComposeBook helps your project, consider:
+
 - ⭐ **Star this repository**
 - 🐦 **Tweet about it**
 - 📝 **Write a blog post**
