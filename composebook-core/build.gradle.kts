@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.ysraelmorenopkg.storybook"
+group = "com.ysraelmorenopkg.composebook"
 version = "0.1.0-SNAPSHOT"
 
 kotlin {
@@ -19,9 +19,9 @@ publishing {
         create<MavenPublication>("maven") {
             from(components["java"])
             
-            groupId = "com.ysraelmorenopkg.storybook"
-            artifactId = "storybook-core"
-            version = "0.1.0-SNAPSHOT"
+            groupId = "com.ysraelmorenopkg.composebook"
+            artifactId = "composebook-core"
+            version = "0.1.0-SNAPSHOT"  // Must match the module version
         }
     }
 }

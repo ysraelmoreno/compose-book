@@ -8,6 +8,9 @@ import com.ysraelmorenopkg.storybook.samples.button.ButtonDisabledStory
 import com.ysraelmorenopkg.storybook.samples.button.ButtonPrimaryStory
 import com.ysraelmorenopkg.storybook.samples.card.CardDefaultStory
 import com.ysraelmorenopkg.storybook.samples.card.CardWithImageStory
+import com.ysraelmorenopkg.storybook.samples.dropdown.DropdownDefaultStory
+import com.ysraelmorenopkg.storybook.samples.dropdown.DropdownDisabledStory
+import com.ysraelmorenopkg.storybook.samples.dropdown.DropdownWithSelectionStory
 
 /**
  * Registers all sample stories with the given registry.
@@ -28,4 +31,9 @@ fun registerSampleStories(registry: StoryRegistry) {
     // Card stories
     registry.register(CardDefaultStory)
     registry.register(CardWithImageStory)
+    
+    // Dropdown stories
+    registry.register(DropdownDefaultStory)
+    registry.register(DropdownWithSelectionStory)
+    registry.register(DropdownDisabledStory)
 }

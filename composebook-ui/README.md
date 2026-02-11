@@ -30,15 +30,15 @@ This module provides a modern, professional interface inspired by ComposeBook JS
 - `ComposeBookIcons`: Custom SVG-style icons
 
 ### Application
-- `ModernComposeBookApp`: Main application shell with modern UI
+- `ComposeBookApp`: Main application shell with modern UI
 - `ControlsPanel`: Custom controls panel matching ComposeBook JS design
 
 ## Usage
 
 ```kotlin
-import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
+import com.ysraelmorenopkg.storybook.ui.app.ComposeBookApp
 
-ModernComposeBookApp(
+ComposeBookApp(
     registry = yourRegistry,
     darkTheme = true
 )

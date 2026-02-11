@@ -6,15 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.ysraelmorenopkg.storybook.core.registry.InMemoryStoryRegistry
 import com.ysraelmorenopkg.storybook.samples.registerSampleStories
-import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
+import com.ysraelmorenopkg.storybook.ui.app.ComposeBookApp
 
 /**
- * Main activity that launches the modern ComposeBook application.
+ * Main activity that launches the ComposeBook application.
  * 
  * This demonstrates the complete MVP with modern UI:
  * - Creates a registry
  * - Manually registers sample stories
- * - Launches ModernComposeBookApp with custom design system
+ * - Launches ComposeBookApp with custom design system
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +26,8 @@ class MainActivity : ComponentActivity() {
         registerSampleStories(registry)
         
         setContent {
-            // Modern ComposeBook UI with custom design system
-            ModernComposeBookApp(
+            // ComposeBook UI with custom design system
+            ComposeBookApp(
                 registry = registry,
                 darkTheme = true // Use dark theme by default
             )
