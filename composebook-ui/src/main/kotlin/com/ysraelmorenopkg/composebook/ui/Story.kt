@@ -4,11 +4,13 @@ import com.ysraelmorenopkg.composebook.ui.adapter.ComposeStory
 import com.ysraelmorenopkg.composebook.ui.builder.StoryBuilder
 import com.ysraelmorenopkg.composebook.core.model.StoryId
 
+// Re-export DocumentationBuilder for public API
+typealias DocumentationBuilder = com.ysraelmorenopkg.composebook.ui.builder.StoryDocumentationBuilder
+
 /**
  * Creates a Compose story using a DSL.
  * 
  * This is the modern, simplified API for creating stories in ComposeBook.
- * It's an alias for the story builder with cleaner naming.
  * 
  * Example usage:
  * ```
@@ -20,6 +22,18 @@ import com.ysraelmorenopkg.composebook.core.model.StoryId
  *     name = "Button / Primary",
  *     defaultProps = ButtonProps("Click", true)
  * ) {
+ *     documentation {
+ *         description("Primary action button for important user actions")
+ *         usage("""
+ *             Button(
+ *                 text = "Save Changes",
+ *                 enabled = true
+ *             )
+ *         """)
+ *         props("text: String - Button label\nenabled: Boolean - Interactive state")
+ *         notes("Use sparingly - one primary button per screen")
+ *     }
+ * 
  *     control(
  *         key = "text",
  *         control = TextControl("Text", "Button label"),

@@ -26,6 +26,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.ysraelmorenopkg.composebook.ui.adapter.ComposeStory
 import com.ysraelmorenopkg.composebook.ui.canvas.StoryCanvas
+import com.ysraelmorenopkg.composebook.ui.docs.DocumentationView
+import com.ysraelmorenopkg.composebook.ui.tabs.StoryTab
+import com.ysraelmorenopkg.composebook.ui.tabs.TabBar
 import com.ysraelmorenopkg.composebook.core.environment.StoryEnvironment
 import com.ysraelmorenopkg.composebook.core.registry.StoryRegistry
 import com.ysraelmorenopkg.composebook.core.runtime.StoryRuntimeState
@@ -44,8 +47,8 @@ import com.ysraelmorenopkg.composebook.ui.theme.ComposeBookTheme
  * 
  * Vertical layout structure:
  * - Top: Stories header (retractable)
- * - Middle: Canvas (component preview)
- * - Bottom: Controls panel (retractable)
+ * - Middle: Tab bar (Canvas/Docs) + Content area
+ * - Bottom: Controls panel (retractable, only visible on Canvas tab)
  * 
  * @param registry Story registry containing all stories
  * @param modifier Root modifier
@@ -63,6 +66,7 @@ fun ComposeBookApp(
         var selectedStory by remember { mutableStateOf<ComposeStory<*>?>(stories.firstOrNull()) }
         var storiesExpanded by remember { mutableStateOf(false) }
         var controlsExpanded by remember { mutableStateOf(true) }
+        var selectedTab by remember { mutableStateOf(StoryTab.Canvas) }
         
         var runtimeState by remember(selectedStory) {
             val story = selectedStory
@@ -105,24 +109,35 @@ fun ComposeBookApp(
                 )
             }
             
-            // Middle - Canvas
+            // Tab Bar
+            if (stories.isNotEmpty() && selectedStory != null) {
+                TabBar(
+                    selectedTab = selectedTab,
+                    onTabSelected = { selectedTab = it },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+            
+            // Middle - Content Area (Canvas or Docs)
             Box(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
             ) {
-                if (stories.isEmpty()) {
-                    EmptyStateContent()
-                } else {
-                    CanvasContent(
+                when {
+                    stories.isEmpty() -> EmptyStateContent()
+                    selectedTab == StoryTab.Canvas -> CanvasContent(
                         selectedStory = selectedStory,
                         runtimeState = runtimeState
+                    )
+                    selectedTab == StoryTab.Docs -> DocumentationContent(
+                        selectedStory = selectedStory
                     )
                 }
             }
             
-            // Bottom - Controls Panel
-            if (stories.isNotEmpty() && selectedStory != null) {
+            // Bottom - Controls Panel (only visible on Canvas tab)
+            if (stories.isNotEmpty() && selectedStory != null && selectedTab == StoryTab.Canvas) {
                 ControlsPanel(
                     story = selectedStory,
                     runtimeState = runtimeState,
@@ -309,6 +324,18 @@ private fun CanvasContent(
                     .fillMaxSize()
             )
         }
+    } ?: EmptyStateContent()
+}
+
+@Composable
+private fun DocumentationContent(
+    selectedStory: ComposeStory<*>?
+) {
+    selectedStory?.let { story ->
+        DocumentationView(
+            documentation = story.documentation,
+            modifier = Modifier.fillMaxSize()
+        )
     } ?: EmptyStateContent()
 }
 
