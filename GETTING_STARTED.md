@@ -13,8 +13,7 @@ Quick checklist to start using the new modern UI.
 ### 2. Module Structure
 Verify these modules exist:
 - [ ] `composebook-core` - Core functionality
-- [ ] `composebook-compose` - Compose adapter
-- [ ] `composebook-ui` - Modern UI (NEW)
+- [ ] `composebook-ui` - Modern UI with complete story management
 - [ ] `composebook-samples` - Sample stories
 - [ ] `app` - Demo application
 
@@ -26,8 +25,8 @@ Check these files are updated:
 
 ### 4. Code Changes
 Verify these updates:
-- [ ] `MainActivity.kt` imports `ModernComposeBookApp`
-- [ ] `MainActivity.kt` uses `ModernComposeBookApp` instead of `ComposeBookApp`
+- [ ] `MainActivity.kt` imports `ComposeBookApp`
+- [ ] `MainActivity.kt` uses `ComposeBookApp`
 - [ ] No compilation errors
 
 ## 🚀 Building the Project
@@ -123,10 +122,10 @@ plugins {
 ./gradlew build
 ```
 
-#### "Unresolved reference: ModernComposeBookApp"
+#### "Unresolved reference: ComposeBookApp"
 ```kotlin
 // Check import
-import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
+import com.ysraelmorenopkg.composebook.ui.app.ComposeBookApp
 ```
 
 #### Dependency resolution errors
@@ -143,7 +142,7 @@ import com.ysraelmorenopkg.storybook.ui.app.ModernComposeBookApp
 
 #### Black screen / blank canvas
 - Check if stories are registered correctly
-- Verify `ModernComposeBookApp` receives the registry
+- Verify `ComposeBookApp` receives the registry
 - Check logcat for errors
 
 #### Controls not working
@@ -204,7 +203,7 @@ composebook-ui/
 │   ├── ComposeBookIcons.kt
 │   └── ComposeBookDivider.kt
 └── app/
-    ├── ModernComposeBookApp.kt   ← Main app
+    ├── ComposeBookApp.kt   ← Main app
     └── ControlsPanel.kt
 ```
 
@@ -212,7 +211,7 @@ composebook-ui/
 
 ### Change to Light Theme
 ```kotlin
-ModernComposeBookApp(
+ComposeBookApp(
     registry = registry,
     darkTheme = false  // Change to light theme
 )
@@ -224,16 +223,9 @@ ComposeBookTheme(darkTheme = true) {
     CompositionLocalProvider(
         LocalComposeBookColors provides YourCustomColors
     ) {
-        ModernComposeBookApp(registry = registry)
+        ComposeBookApp(registry = registry)
     }
 }
-```
-
-### Switch Back to Classic UI
-```kotlin
-import com.ysraelmorenopkg.storybook.compose.app.ComposeBookApp
-
-ComposeBookApp(registry = registry)
 ```
 
 ## 🎉 Success!
