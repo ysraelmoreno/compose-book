@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+group = "com.ysraelmorenopkg.composebook"
+version = "0.1.0"
+
 android {
     namespace = "com.ysraelmorenopkg.storybook_samples"
     compileSdk = 36

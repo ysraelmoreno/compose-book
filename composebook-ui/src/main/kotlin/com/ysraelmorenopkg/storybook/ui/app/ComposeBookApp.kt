@@ -39,7 +39,7 @@ import com.ysraelmorenopkg.storybook.ui.components.ComposeBookTitle
 import com.ysraelmorenopkg.storybook.ui.theme.ComposeBookTheme
 
 /**
- * Modern Storybook App with custom design system.
+ * ComposeBook App with custom design system.
  * 
  * Vertical layout structure:
  * - Top: Stories header (retractable)
@@ -51,7 +51,7 @@ import com.ysraelmorenopkg.storybook.ui.theme.ComposeBookTheme
  * @param darkTheme Whether to use dark theme (default: true)
  */
 @Composable
-fun ModernComposeBookApp(
+fun ComposeBookApp(
     registry: StoryRegistry,
     modifier: Modifier = Modifier,
     darkTheme: Boolean = true

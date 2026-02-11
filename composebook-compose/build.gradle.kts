@@ -9,7 +9,7 @@ group = "com.ysraelmorenopkg.composebook"
 version = "0.1.0-SNAPSHOT"
 
 android {
-    namespace = "com.ysraelmorenopkg.storybook_compose"
+    namespace = "com.ysraelmorenopkg.composebook_compose"
     compileSdk = 35
 
     defaultConfig {
@@ -71,7 +71,7 @@ publishing {
             
             groupId = "com.ysraelmorenopkg.composebook"
             artifactId = "composebook-compose"
-            version = "0.1.0-SNAPSHOT"
+                version = "0.1.0-SNAPSHOT"  // Must match the module version
         }
     }
 }

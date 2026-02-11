@@ -2,7 +2,11 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    `maven-publish`
 }
+
+group = "com.ysraelmorenopkg.composebook"
+version = "0.1.0-SNAPSHOT"
 
 android {
     namespace = "com.ysraelmorenopkg.storybook.ui"
@@ -38,6 +42,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -55,4 +65,18 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            afterEvaluate {
+                from(components["release"])
+            }
+            
+            groupId = "com.ysraelmorenopkg.composebook"
+            artifactId = "composebook-ui"
+            version = "0.1.0"
+        }
+    }
 }
