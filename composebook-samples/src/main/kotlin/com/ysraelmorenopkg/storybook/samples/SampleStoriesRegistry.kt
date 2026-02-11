@@ -1,11 +1,12 @@
 package com.ysraelmorenopkg.storybook.samples
 
-import com.ysraelmorenopkg.storybook.core.registry.StoryRegistry
+import com.ysraelmorenopkg.composebook.core.registry.StoryRegistry
 import com.ysraelmorenopkg.storybook.samples.badge.BadgeErrorStory
 import com.ysraelmorenopkg.storybook.samples.badge.BadgePrimaryStory
 import com.ysraelmorenopkg.storybook.samples.badge.BadgeSuccessStory
 import com.ysraelmorenopkg.storybook.samples.button.ButtonDisabledStory
 import com.ysraelmorenopkg.storybook.samples.button.ButtonPrimaryStory
+import com.ysraelmorenopkg.storybook.samples.button.DocumentedButtonStory
 import com.ysraelmorenopkg.storybook.samples.card.CardDefaultStory
 import com.ysraelmorenopkg.storybook.samples.card.CardWithImageStory
 import com.ysraelmorenopkg.storybook.samples.dropdown.DropdownDefaultStory
@@ -27,6 +28,7 @@ fun registerSampleStories(registry: StoryRegistry) {
     // Button stories
     registry.register(ButtonPrimaryStory)
     registry.register(ButtonDisabledStory)
+    registry.register(DocumentedButtonStory)
     
     // Card stories
     registry.register(CardDefaultStory)

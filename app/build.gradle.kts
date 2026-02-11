@@ -41,7 +41,6 @@ android {
 
 dependencies {
     implementation(project(":composebook-core"))
-    implementation(project(":composebook-compose"))
     implementation(project(":composebook-ui"))
     implementation(project(":composebook-samples"))
     
