@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.storybook.compose.app
+package com.ysraelmorenopkg.composebook.compose.app
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -26,12 +25,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ysraelmorenopkg.storybook.compose.adapter.ComposeStory
-import com.ysraelmorenopkg.storybook.compose.canvas.StoryCanvas
-import com.ysraelmorenopkg.storybook.compose.controls.ControlsPanel
-import com.ysraelmorenopkg.storybook.core.environment.StoryEnvironment
-import com.ysraelmorenopkg.storybook.core.registry.StoryRegistry
-import com.ysraelmorenopkg.storybook.core.runtime.StoryRuntimeState
+import com.ysraelmorenopkg.composebook.compose.adapter.ComposeStory
+import com.ysraelmorenopkg.composebook.compose.canvas.StoryCanvas
+import com.ysraelmorenopkg.composebook.compose.controls.ControlsPanel
+import com.ysraelmorenopkg.composebook.core.environment.StoryEnvironment
+import com.ysraelmorenopkg.composebook.core.registry.StoryRegistry
+import com.ysraelmorenopkg.composebook.core.runtime.StoryRuntimeState
 
 /**
  * Main ComposeBook application UI shell.

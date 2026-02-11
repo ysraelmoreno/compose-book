@@ -9,7 +9,7 @@ group = "com.ysraelmorenopkg.composebook"
 version = "0.1.0-SNAPSHOT"
 
 android {
-    namespace = "com.ysraelmorenopkg.storybook.ui"
+    namespace = "com.ysraelmorenopkg.composebook.ui"
     compileSdk = 35
 
     defaultConfig {
@@ -52,7 +52,6 @@ android {
 
 dependencies {
     implementation(project(":composebook-core"))
-    implementation(project(":composebook-compose"))
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -76,7 +75,11 @@ publishing {
             
             groupId = "com.ysraelmorenopkg.composebook"
             artifactId = "composebook-ui"
-            version = "0.1.0"
+            version = "0.1.0-SNAPSHOT"  // Must match module version
         }
+    }
+    
+    repositories {
+        mavenLocal()
     }
 }

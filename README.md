@@ -126,8 +126,11 @@ enum class ButtonVariant { Primary, Secondary, Destructive }
 #### 2. Create the Story
 
 ```kotlin
+import com.ysraelmorenopkg.composebook.ui.story
+import com.ysraelmorenopkg.composebook.core.control.*
+
 val PrimaryButtonStory = story(
-    id = StoryId("button.primary"),
+    id = "button.primary",
     name = "Button / Primary",
     defaultProps = ButtonProps(
         text = "Click Me",
@@ -138,14 +141,14 @@ val PrimaryButtonStory = story(
     // Define editable controls
     control(
         key = "text",
-        control = TextControl(label = "Text"),
+        control = TextControl(label = "Text", description = "Button text"),
         getter = { it.text },
         setter = { props, value -> props.copy(text = value) }
     )
     
     control(
         key = "enabled",
-        control = BooleanControl(label = "Enabled"),
+        control = BooleanControl(label = "Enabled", description = "Enable button"),
         getter = { it.enabled },
         setter = { props, value -> props.copy(enabled = value) }
     )
@@ -154,7 +157,8 @@ val PrimaryButtonStory = story(
         key = "variant",
         control = EnumControl(
             label = "Variant",
-            values = ButtonVariant.entries.toSet()
+            values = ButtonVariant.entries.toSet(),
+            description = "Button style variant"
         ),
         getter = { it.variant },
         setter = { props, value -> props.copy(variant = value) }
@@ -183,14 +187,16 @@ class MainActivity : ComponentActivity() {
         registry.register(PrimaryButtonStory)
         
         setContent {
-            // Option 1: Modern UI
-            ModernComposeBookApp(
+            // Option 1: Modern UI (recommended)
+            ComposeBookApp(
                 registry = registry,
                 darkTheme = true
             )
             
             // Option 2: Classic Material UI
-            // ComposeBookApp(registry = registry)
+            // MaterialTheme {
+            //     StorybookApp(registry = registry)
+            // }
         }
     }
 }

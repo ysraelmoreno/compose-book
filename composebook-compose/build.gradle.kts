@@ -71,7 +71,11 @@ publishing {
             
             groupId = "com.ysraelmorenopkg.composebook"
             artifactId = "composebook-compose"
-                version = "0.1.0-SNAPSHOT"  // Must match the module version
+            version = "0.1.0-SNAPSHOT"  // Must match the module version
         }
+    }
+    
+    repositories {
+        mavenLocal()
     }
 }
