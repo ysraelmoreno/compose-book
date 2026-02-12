@@ -1,7 +1,8 @@
-package com.ysraelmorenopkg.storybook.core.api
+package com.ysraelmorenopkg.composebook.core.api
 
-import com.ysraelmorenopkg.storybook.core.control.PropBinding
-import com.ysraelmorenopkg.storybook.core.model.StoryId
+import com.ysraelmorenopkg.composebook.core.control.PropBinding
+import com.ysraelmorenopkg.composebook.core.model.Documentation
+import com.ysraelmorenopkg.composebook.core.model.StoryId
 
 /**
  * Core interface representing a Story.
@@ -34,6 +35,15 @@ interface Story<Props : Any> {
      * List of prop bindings that define which props can be controlled and how.
      */
     val controls: List<PropBinding<Props, *>>
+    
+    /**
+     * Optional documentation for this story.
+     * 
+     * Provides additional information about the component, usage examples,
+     * prop descriptions, and implementation notes.
+     */
+    val documentation: Documentation
+        get() = Documentation.Empty
     
     /**
      * Renders the story with the given props and context.

@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.storybook.core.model
+package com.ysraelmorenopkg.composebook.core.model
 
 /**
  * Type-safe identifier for a Story.

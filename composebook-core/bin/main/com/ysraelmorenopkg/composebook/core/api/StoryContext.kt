@@ -1,6 +1,6 @@
-package com.ysraelmorenopkg.storybook.core.api
+package com.ysraelmorenopkg.composebook.core.api
 
-import com.ysraelmorenopkg.storybook.core.environment.StoryEnvironment
+import com.ysraelmorenopkg.composebook.core.environment.StoryEnvironment
 
 /**
  * Context provided to a story during rendering.

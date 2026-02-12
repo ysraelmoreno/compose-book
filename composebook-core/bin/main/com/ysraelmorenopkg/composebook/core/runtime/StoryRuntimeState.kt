@@ -1,6 +1,6 @@
-package com.ysraelmorenopkg.storybook.core.runtime
+package com.ysraelmorenopkg.composebook.core.runtime
 
-import com.ysraelmorenopkg.storybook.core.environment.StoryEnvironment
+import com.ysraelmorenopkg.composebook.core.environment.StoryEnvironment
 
 /**
  * Represents the current runtime state of a story.

@@ -1,7 +1,7 @@
-package com.ysraelmorenopkg.storybook.core.registry
+package com.ysraelmorenopkg.composebook.core.registry
 
-import com.ysraelmorenopkg.storybook.core.api.Story
-import com.ysraelmorenopkg.storybook.core.model.StoryId
+import com.ysraelmorenopkg.composebook.core.api.Story
+import com.ysraelmorenopkg.composebook.core.model.StoryId
 
 /**
  * Registry for discovering and accessing stories.

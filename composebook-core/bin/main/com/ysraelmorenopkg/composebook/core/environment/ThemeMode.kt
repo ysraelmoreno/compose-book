@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.storybook.core.environment
+package com.ysraelmorenopkg.composebook.core.environment
 
 /**
  * Theme mode for rendering stories.

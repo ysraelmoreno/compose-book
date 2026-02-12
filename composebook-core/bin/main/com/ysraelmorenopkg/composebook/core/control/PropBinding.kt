@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.storybook.core.control
+package com.ysraelmorenopkg.composebook.core.control
 
 /**
  * Binds a prop field to a control, enabling runtime editing without reflection.

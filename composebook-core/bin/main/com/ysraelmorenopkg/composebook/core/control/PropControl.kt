@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.storybook.core.control
+package com.ysraelmorenopkg.composebook.core.control
 
 /**
  * Base interface for prop controls.

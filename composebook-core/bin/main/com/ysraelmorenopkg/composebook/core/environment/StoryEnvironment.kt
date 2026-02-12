@@ -1,4 +1,4 @@
-package com.ysraelmorenopkg.storybook.core.environment
+package com.ysraelmorenopkg.composebook.core.environment
 
 import java.util.Locale
 
