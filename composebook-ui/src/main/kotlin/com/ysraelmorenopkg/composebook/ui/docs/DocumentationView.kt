@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.ysraelmorenopkg.composebook.core.model.Documentation
 import com.ysraelmorenopkg.composebook.ui.components.ComposeBookBodyText
@@ -53,12 +55,13 @@ fun DocumentationView(
                 )
             }
             
-            // Usage Section
+            // Usage Section (default language: Kotlin for syntax highlighting)
             documentation.usage?.let { usage ->
                 DocumentationSection(
                     title = "Usage",
                     content = usage,
-                    isCode = true
+                    isCode = true,
+                    codeLanguage = "kotlin"
                 )
             }
             
@@ -86,6 +89,7 @@ private fun DocumentationSection(
     title: String,
     content: String,
     isCode: Boolean = false,
+    codeLanguage: String = "kotlin",
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -95,7 +99,7 @@ private fun DocumentationSection(
         ComposeBookLabel(text = title.uppercase())
         
         if (isCode) {
-            CodeBlock(content = content)
+            CodeBlock(content = content, language = codeLanguage)
         } else {
             ComposeBookBodyText(
                 text = content,
@@ -108,18 +112,32 @@ private fun DocumentationSection(
 @Composable
 private fun CodeBlock(
     content: String,
+    language: String = "kotlin",
     modifier: Modifier = Modifier
 ) {
+    val colors = ComposeBookTheme.colors
+    val typography = ComposeBookTheme.typography
+    val syntaxColors = KotlinSyntaxColors(
+        default = colors.textPrimary,
+        keyword = colors.accent,
+        string = colors.success,
+        comment = colors.textTertiary,
+        number = colors.info
+    )
+    val highlighted = when (language.lowercase()) {
+        "kotlin" -> KotlinSyntaxHighlighter.highlight(content, syntaxColors)
+        else -> AnnotatedString(content.trimIndent())
+    }
     Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
-            .background(ComposeBookTheme.colors.surface)
+            .background(colors.surface)
             .padding(16.dp)
     ) {
-        ComposeBookBodyText(
-            text = content.trimIndent(),
-            color = ComposeBookTheme.colors.textPrimary
+        Text(
+            text = highlighted,
+            style = typography.code
         )
     }
 }
