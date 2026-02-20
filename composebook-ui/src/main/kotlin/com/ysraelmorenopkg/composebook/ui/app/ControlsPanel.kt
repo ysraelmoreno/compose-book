@@ -34,7 +34,6 @@ import com.ysraelmorenopkg.composebook.ui.adapter.ComposeStory
 import com.ysraelmorenopkg.composebook.core.control.BooleanControl
 import com.ysraelmorenopkg.composebook.core.control.EnumControl
 import com.ysraelmorenopkg.composebook.core.control.PropBinding
-import com.ysraelmorenopkg.composebook.core.control.SelectControl
 import com.ysraelmorenopkg.composebook.core.control.TextControl
 import com.ysraelmorenopkg.composebook.core.runtime.StoryRuntimeState
 import com.ysraelmorenopkg.composebook.ui.components.ChevronDownIcon
@@ -194,17 +193,6 @@ private fun ControlItem(
                 SelectControlRendererAny(
                     options = control.values,
                     displayName = { it.toString() },
-                    binding = binding,
-                    currentProps = currentProps,
-                    onPropsChange = onPropsChange
-                )
-            }
-            is SelectControl<*> -> {
-                @Suppress("UNCHECKED_CAST")
-                val typedControl = control as SelectControl<Any>
-                SelectControlRendererAny(
-                    options = typedControl.options,
-                    displayName = typedControl.displayName,
                     binding = binding,
                     currentProps = currentProps,
                     onPropsChange = onPropsChange
