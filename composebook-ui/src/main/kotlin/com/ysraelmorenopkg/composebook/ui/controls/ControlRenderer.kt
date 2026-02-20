@@ -84,6 +84,7 @@ fun <Props : Any, T : Any> ControlRenderer(
                     description = control.description,
                     values = control.values as List<T>,
                     currentValue = currentValue,
+                    displayName = { it.toString() },
                     onValueChange = { newValue ->
                         val updatedProps = binding.updateValue(currentProps, newValue)
                         onPropsChange(updatedProps)
@@ -168,6 +169,7 @@ private fun <T : Any> EnumControlRenderer(
     description: String?,
     values: List<T>,
     currentValue: T,
+    displayName: (T) -> String = { it.toString() },
     onValueChange: (T) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -178,7 +180,7 @@ private fun <T : Any> EnumControlRenderer(
             onExpandedChange = { expanded = it }
         ) {
             TextField(
-                value = currentValue.toString(),
+                value = displayName(currentValue),
                 onValueChange = {},
                 readOnly = true,
                 label = { Text(label) },
@@ -195,7 +197,7 @@ private fun <T : Any> EnumControlRenderer(
             ) {
                 values.forEach { value ->
                     DropdownMenuItem(
-                        text = { Text(value.toString()) },
+                        text = { Text(displayName(value)) },
                         onClick = {
                             onValueChange(value)
                             expanded = false
