@@ -34,6 +34,7 @@ import com.ysraelmorenopkg.composebook.ui.adapter.ComposeStory
 import com.ysraelmorenopkg.composebook.core.control.BooleanControl
 import com.ysraelmorenopkg.composebook.core.control.EnumControl
 import com.ysraelmorenopkg.composebook.core.control.PropBinding
+import com.ysraelmorenopkg.composebook.core.control.SelectControl
 import com.ysraelmorenopkg.composebook.core.control.TextControl
 import com.ysraelmorenopkg.composebook.core.runtime.StoryRuntimeState
 import com.ysraelmorenopkg.composebook.ui.components.ChevronDownIcon
@@ -190,8 +191,20 @@ private fun ControlItem(
                 )
             }
             is EnumControl<*> -> {
-                EnumControlRendererAny(
-                    control = control,
+                SelectControlRendererAny(
+                    options = control.values,
+                    displayName = { it.toString() },
+                    binding = binding,
+                    currentProps = currentProps,
+                    onPropsChange = onPropsChange
+                )
+            }
+            is SelectControl<*> -> {
+                @Suppress("UNCHECKED_CAST")
+                val typedControl = control as SelectControl<Any>
+                SelectControlRendererAny(
+                    options = typedControl.options,
+                    displayName = typedControl.displayName,
                     binding = binding,
                     currentProps = currentProps,
                     onPropsChange = onPropsChange
@@ -269,8 +282,9 @@ private fun BooleanControlRenderer(
 }
 
 @Composable
-private fun EnumControlRendererAny(
-    control: EnumControl<*>,
+private fun SelectControlRendererAny(
+    options: List<*>,
+    displayName: (Any) -> String,
     binding: PropBinding<Any, Any>,
     currentProps: Any,
     onPropsChange: (Any) -> Unit
@@ -283,7 +297,6 @@ private fun EnumControlRendererAny(
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // Dropdown button
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -298,7 +311,7 @@ private fun EnumControlRendererAny(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ComposeBookBodyText(
-                    text = selectedValue.toString(),
+                    text = displayName(selectedValue),
                     color = ComposeBookTheme.colors.textPrimary
                 )
                 if (expanded) {
@@ -309,7 +322,6 @@ private fun EnumControlRendererAny(
             }
         }
         
-        // Options
         if (expanded) {
             LazyColumn(
                 modifier = Modifier
@@ -318,8 +330,8 @@ private fun EnumControlRendererAny(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(
-                    items = control.values.toList(),
-                    key = { it.toString() }
+                    items = options,
+                    key = { displayName(it!!) }
                 ) { option ->
                     Box(
                         modifier = Modifier
@@ -333,14 +345,14 @@ private fun EnumControlRendererAny(
                                 }
                             )
                             .clickable {
-                                selectedValue = option
+                                selectedValue = option!!
                                 onPropsChange(binding.setter(currentProps, option))
                                 expanded = false
                             }
                             .padding(12.dp)
                     ) {
                         ComposeBookBodyText(
-                            text = option.toString(),
+                            text = displayName(option!!),
                             color = if (option == selectedValue) {
                                 ComposeBookTheme.colors.accent
                             } else {

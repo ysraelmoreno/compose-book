@@ -80,6 +80,19 @@ val DropdownDefaultStory = composeStory(
     )
     
     control(
+        key = "options",
+        control = TextControl("Options", "Comma-separated list of options"),
+        getter = { it.options.joinToString(", ") { opt -> opt.label } },
+        setter = { props, value ->
+            val options = value.split(",")
+                .map { it.trim() }
+                .filter { it.isNotBlank() }
+                .mapIndexed { i, label -> DropdownOption(id = "opt_$i", label = label) }
+            props.copy(options = options)
+        }
+    )
+    
+    control(
         key = "enabled",
         control = BooleanControl("Enabled", "Enable/disable interaction"),
         getter = { it.enabled },
@@ -137,6 +150,19 @@ val DropdownWithSelectionStory = composeStory(
     )
     
     control(
+        key = "options",
+        control = TextControl("Options", "Comma-separated list of options"),
+        getter = { it.options.joinToString(", ") { opt -> opt.label } },
+        setter = { props, value ->
+            val options = value.split(",")
+                .map { it.trim() }
+                .filter { it.isNotBlank() }
+                .mapIndexed { i, label -> DropdownOption(id = "opt_$i", label = label) }
+            props.copy(options = options)
+        }
+    )
+    
+    control(
         key = "enabled",
         control = BooleanControl("Enabled"),
         getter = { it.enabled },
@@ -191,6 +217,19 @@ val DropdownDisabledStory = composeStory(
         control = TextControl("Placeholder"),
         getter = { it.placeholder },
         setter = { props, value -> props.copy(placeholder = value) }
+    )
+    
+    control(
+        key = "options",
+        control = TextControl("Options", "Comma-separated list of options"),
+        getter = { it.options.joinToString(", ") { opt -> opt.label } },
+        setter = { props, value ->
+            val options = value.split(",")
+                .map { it.trim() }
+                .filter { it.isNotBlank() }
+                .mapIndexed { i, label -> DropdownOption(id = "opt_$i", label = label) }
+            props.copy(options = options)
+        }
     )
     
     control(

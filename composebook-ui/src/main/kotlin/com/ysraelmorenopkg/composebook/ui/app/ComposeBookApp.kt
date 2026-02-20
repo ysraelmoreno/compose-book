@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -112,13 +113,20 @@ fun ComposeBookApp(
                 )
             }
             
-            // Tab Bar
-            if (stories.isNotEmpty() && selectedStory != null) {
+            // Tab Bar (only when the selected story has documentation)
+            if (stories.isNotEmpty() && selectedStory != null && !selectedStory!!.documentation.isEmpty()) {
                 TabBar(
                     selectedTab = selectedTab,
                     onTabSelected = { selectedTab = it },
                     modifier = Modifier.fillMaxWidth()
                 )
+            }
+
+            // When switching to a story without docs, stay on Canvas
+            LaunchedEffect(selectedStory) {
+                if (selectedStory?.documentation?.isEmpty() == true) {
+                    selectedTab = StoryTab.Canvas
+                }
             }
             
             // Middle - Content Area (Canvas or Docs)
