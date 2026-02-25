@@ -12,6 +12,7 @@ import com.ysraelmorenopkg.storybook.samples.card.CardWithImageStory
 import com.ysraelmorenopkg.storybook.samples.dropdown.DropdownDefaultStory
 import com.ysraelmorenopkg.storybook.samples.dropdown.DropdownDisabledStory
 import com.ysraelmorenopkg.storybook.samples.dropdown.DropdownWithSelectionStory
+import com.ysraelmorenopkg.storybook.samples.sdui.registerSduiSampleStories
 
 /**
  * Registers all sample stories with the given registry.
@@ -38,4 +39,7 @@ fun registerSampleStories(registry: StoryRegistry) {
     registry.register(DropdownDefaultStory)
     registry.register(DropdownWithSelectionStory)
     registry.register(DropdownDisabledStory)
+
+    // SDUI stories
+    registerSduiSampleStories(registry)
 }

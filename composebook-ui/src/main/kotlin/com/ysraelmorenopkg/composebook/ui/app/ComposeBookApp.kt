@@ -147,8 +147,8 @@ fun ComposeBookApp(
                 }
             }
             
-            // Bottom - Controls Panel (only visible on Canvas tab)
-            if (stories.isNotEmpty() && selectedStory != null && selectedTab == StoryTab.Canvas) {
+            // Bottom - Controls Panel (only visible on Canvas tab when story has controls)
+            if (stories.isNotEmpty() && selectedStory != null && selectedTab == StoryTab.Canvas && selectedStory!!.controls.isNotEmpty()) {
                 ControlsPanel(
                     story = selectedStory,
                     runtimeState = runtimeState,

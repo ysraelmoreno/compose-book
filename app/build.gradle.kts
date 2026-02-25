@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation(project(":composebook-core"))
     implementation(project(":composebook-ui"))
+    implementation(project(":composebook-sdui"))
     implementation(project(":composebook-samples"))
     
     implementation(libs.androidx.core.ktx)

@@ -5,15 +5,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.ysraelmorenopkg.composebook.core.registry.InMemoryStoryRegistry
-import com.ysraelmorenopkg.storybook.samples.registerSampleStories
 import com.ysraelmorenopkg.composebook.ui.app.ComposeBookApp
+import com.ysraelmorenopkg.storybook.samples.registerSampleStories
+import com.ysraelmorenopkg.storybook.samples.sdui.registerSduiJsonSampleStories
 
 /**
  * Main activity that launches the ComposeBook application.
  * 
  * This demonstrates the complete MVP with modern UI:
  * - Creates a registry
- * - Manually registers sample stories
+ * - Manually registers sample stories (including SDUI)
+ * - Registers SDUI stories parsed from a raw JSON asset file
  * - Launches ComposeBookApp with custom design system
  */
 class MainActivity : ComponentActivity() {
@@ -21,15 +23,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         
-        // Create registry and register stories
         val registry = InMemoryStoryRegistry()
         registerSampleStories(registry)
+        registerSduiJsonSampleStories(registry, assets)
         
         setContent {
-            // ComposeBook UI with custom design system
             ComposeBookApp(
                 registry = registry,
-                darkTheme = true // Use dark theme by default
+                darkTheme = true,
             )
         }
     }
