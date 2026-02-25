@@ -6,5 +6,6 @@ package com.ysraelmorenopkg.storybook.samples.card
 data class CardProps(
     val title: String,
     val description: String,
-    val hasImage: Boolean
+    val hasImage: Boolean,
+    val image: String
 )

@@ -25,7 +25,8 @@ val CardDefaultStory = composeStory(
     defaultProps = CardProps(
         title = "Card Title",
         description = "This is a card description with some content.",
-        hasImage = false
+        hasImage = false,
+        image = ""
     )
 ) {
     control(
@@ -63,7 +64,8 @@ val CardWithImageStory = composeStory(
     defaultProps = CardProps(
         title = "Card with Image",
         description = "This card includes an image placeholder.",
-        hasImage = true
+        hasImage = true,
+        image = ""
     )
 ) {
     control(
@@ -103,14 +105,12 @@ private fun CardComponent(props: CardProps) {
             modifier = Modifier.padding(16.dp)
         ) {
             if (props.hasImage) {
-                // Placeholder for image
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 ) {
-                    // Image placeholder
                 }
                 Spacer(modifier = Modifier.height(16.dp))
             }
