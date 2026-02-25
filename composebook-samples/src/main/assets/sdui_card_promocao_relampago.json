@@ -1,0 +1,29 @@
+{
+  "components": [
+    {
+      "type": "card",
+      "id": "promo-card-001",
+      "parameters": {
+        "title": "Promoção Relâmpago",
+        "subtitle": "Compre 2 e leve 3 — válido até amanhã"
+      },
+      "components": [
+        {
+          "type": "spacer",
+          "parameters": {
+            "height": 8
+          }
+        },
+        {
+          "type": "button",
+          "id": "promo-action-btn",
+          "parameters": {
+            "value": "Aproveitar Oferta",
+            "enabled": true,
+            "style": "destructive"
+          }
+        }
+      ]
+    }
+  ]
+}

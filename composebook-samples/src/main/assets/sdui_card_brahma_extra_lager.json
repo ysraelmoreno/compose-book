@@ -1,0 +1,57 @@
+{
+  "components": [
+    {
+      "type": "card",
+      "id": "product-card-001",
+      "parameters": {
+        "title": "Brahma Extra Lager 350ml",
+        "subtitle": "Pack com 12 unidades"
+      },
+      "components": [
+        {
+          "type": "spacer",
+          "parameters": {
+            "height": 8
+          }
+        },
+        {
+          "type": "text",
+          "id": "price-label",
+          "parameters": {
+            "value": "R$ 42,90"
+          }
+        },
+        {
+          "type": "spacer",
+          "parameters": {
+            "height": 12
+          }
+        },
+        {
+          "type": "button",
+          "id": "add-to-cart-btn",
+          "parameters": {
+            "value": "Adicionar ao Carrinho",
+            "enabled": true,
+            "style": "primary"
+          }
+        },
+        {
+          "type": "spacer",
+          "parameters": {
+            "height": 4
+          }
+        },
+        {
+          "type": "button",
+          "id": "view-details-btn",
+          "parameters": {
+            "value": "Ver Detalhes",
+            "enabled": true,
+            "style": "secondary"
+          }
+        }
+      ]
+    }
+  ]
+}
