@@ -38,6 +38,9 @@ data class SduiPayload(
     fun stringParam(key: String, default: String = ""): String =
         parameters[key]?.toString() ?: default
 
+    fun numberParam(key: String, default: Number = 0): Number =
+        (parameters[key] ?: default) as Number
+
     /**
      * Retrieves a Boolean parameter, defaulting to false.
      */
