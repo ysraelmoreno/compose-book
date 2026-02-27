@@ -14,7 +14,7 @@ import com.ysraelmorenopkg.composebook.ui.adapter.ComposeStory
  */
 class SduiCardPromocaoStories(assetManager: AssetManager, sduiRegistry: SduiRegistry) {
 
-    private val payloads = loadPayloads(assetManager)
+    private val payloads = loadPayloads (assetManager)
 
     val Default = payloads["promo-card-001"]?.let { payload ->
         sduiPayloadStory(
