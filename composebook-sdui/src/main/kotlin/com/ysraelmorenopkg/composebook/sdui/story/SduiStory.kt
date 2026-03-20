@@ -3,6 +3,7 @@ package com.ysraelmorenopkg.composebook.sdui.story
 import androidx.compose.runtime.Composable
 import com.ysraelmorenopkg.composebook.core.api.StoryContext
 import com.ysraelmorenopkg.composebook.core.control.PropBinding
+import com.ysraelmorenopkg.composebook.core.environment.ThemeMode
 import com.ysraelmorenopkg.composebook.core.model.StoryId
 import com.ysraelmorenopkg.composebook.sdui.canvas.SduiCanvas
 import com.ysraelmorenopkg.composebook.sdui.registry.SduiRegistry
@@ -40,6 +41,7 @@ fun <T : Any> sduiStory(
     name: String,
     component: T,
     sduiRegistry: SduiRegistry,
+    themeWrapper: @Composable (ThemeMode, @Composable () -> Unit) -> Unit = DefaultSduiThemeWrapper,
 ): ComposeStory<SduiStoryProps<T>> {
     val storyId = StoryId(id)
     val defaultProps = SduiStoryProps(component = component, registry = sduiRegistry)
@@ -60,6 +62,7 @@ fun <T : Any> sduiStory(
                 component = props.component,
                 registry = props.registry,
                 environment = context.environment,
+                themeWrapper = themeWrapper,
             )
         }
     }

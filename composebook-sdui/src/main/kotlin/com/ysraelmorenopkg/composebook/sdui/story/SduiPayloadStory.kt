@@ -51,6 +51,19 @@ import com.ysraelmorenopkg.composebook.ui.components.SettingsIcon
 import com.ysraelmorenopkg.composebook.ui.theme.ComposeBookTheme
 
 /**
+ * Default theme wrapper that provides vanilla Material3 light/dark theming.
+ * Consumers can replace this with their own design system theme (e.g., BeesTheme).
+ */
+val DefaultSduiThemeWrapper: @Composable (ThemeMode, @Composable () -> Unit) -> Unit =
+    { themeMode, content ->
+        val colorScheme = when (themeMode) {
+            ThemeMode.Light -> lightColorScheme()
+            ThemeMode.Dark -> darkColorScheme()
+        }
+        MaterialTheme(colorScheme = colorScheme) { content() }
+    }
+
+/**
  * Creates a payload-driven ComposeBook story with an embedded editor.
  *
  * Unlike [sduiStory] which renders a pre-built component, this story
@@ -82,6 +95,7 @@ fun sduiPayloadStory(
     name: String,
     defaultPayload: SduiPayload,
     sduiRegistry: SduiRegistry,
+    themeWrapper: @Composable (ThemeMode, @Composable () -> Unit) -> Unit = DefaultSduiThemeWrapper,
 ): ComposeStory<SduiPayloadStoryProps> {
     val storyId = StoryId(id)
     val defaultProps = SduiPayloadStoryProps(
@@ -105,6 +119,7 @@ fun sduiPayloadStory(
                 initialPayload = props.payload,
                 registry = props.registry,
                 context = context,
+                themeWrapper = themeWrapper,
             )
         }
     }
@@ -125,6 +140,7 @@ private fun SduiPayloadCanvasWithEditor(
     initialPayload: SduiPayload,
     registry: SduiRegistry,
     context: StoryContext,
+    themeWrapper: @Composable (ThemeMode, @Composable () -> Unit) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var editablePayload by remember(initialPayload) {
@@ -148,6 +164,7 @@ private fun SduiPayloadCanvasWithEditor(
                 payload = editablePayload,
                 registry = registry,
                 context = context,
+                themeWrapper = themeWrapper,
             )
         }
 
@@ -227,6 +244,7 @@ private fun SduiPayloadPreview(
     payload: SduiPayload,
     registry: SduiRegistry,
     context: StoryContext,
+    themeWrapper: @Composable (ThemeMode, @Composable () -> Unit) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val mapper = remember(registry) { SduiPayloadMapper(registry) }
@@ -243,28 +261,25 @@ private fun SduiPayloadPreview(
         }
     }
 
-    val colorScheme = when (context.environment.theme) {
-        ThemeMode.Light -> lightColorScheme()
-        ThemeMode.Dark -> darkColorScheme()
-    }
-
-    MaterialTheme(colorScheme = colorScheme) {
+    themeWrapper(context.environment.theme) {
         Surface(
             modifier = modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background,
         ) {
-            when (val state = mappingState.value) {
-                is MappingUiState.Loading -> SduiMappingLoading()
+            Box(contentAlignment = Alignment.TopCenter) {
+                when (val state = mappingState.value) {
+                    is MappingUiState.Loading -> SduiMappingLoading()
 
-                is MappingUiState.Error -> SduiMappingError(
-                    message = state.message,
-                    payloadType = payload.type,
-                )
+                    is MappingUiState.Error -> SduiMappingError(
+                        message = state.message,
+                        payloadType = payload.type,
+                    )
 
-                is MappingUiState.Success -> SduiMainRender(
-                    component = state.component,
-                    registry = registry,
-                )
+                    is MappingUiState.Success -> SduiMainRender(
+                        component = state.component,
+                        registry = registry,
+                    )
+                }
             }
         }
     }

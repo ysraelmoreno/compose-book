@@ -116,4 +116,8 @@ local.properties
 */.externalNativeBuild
 */.cxx
 .idea/
+<<<<<<< HEAD
 >>>>>>> f6bde3c (First Commit)
+=======
+.kotlin/*
+>>>>>>> f3f2e72 (feat(composebook): add sdui-canvas)
